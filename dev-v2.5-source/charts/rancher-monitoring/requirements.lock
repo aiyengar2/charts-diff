@@ -51,4 +51,4 @@ dependencies:
   repository: file://../../rancher-pushprox/charts
   version: 0.1.2
 digest: sha256:e9fe12d245bde664b9f3e332cd3a4c94e691e8a81120afa4631eb0041149e252
-generated: "2021-01-15T13:01:53.534382-08:00"
+generated: "2021-01-15T13:46:31.393817-08:00"

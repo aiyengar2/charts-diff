@@ -1,0 +1,72 @@
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-backup/Chart.yaml dev-v2.5-source-alt/charts/rancher-backup/Chart.yaml
+--- dev-v2.5-source/charts/rancher-backup/Chart.yaml	2021-01-15 14:07:36.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-backup/Chart.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -1,19 +1,20 @@
+-apiVersion: v1
+-appVersion: v1.0.3
+-description: Provides ability to back up and restore the Rancher application running on any Kubernetes cluster
+-name: rancher-backup
+-keywords:
+-  - applications
+-  - infrastructure
+-version: 1.0.300
+-icon: https://charts.rancher.io/assets/logos/backup-restore.svg
+ annotations:
++  catalog.cattle.io/auto-install: rancher-backup-crd=match
+   catalog.cattle.io/certified: rancher
++  catalog.cattle.io/display-name: Rancher Backups
+   catalog.cattle.io/namespace: cattle-resources-system
+-  catalog.cattle.io/release-name: rancher-backup
+-  catalog.cattle.io/ui-component: rancher-backup
++  catalog.cattle.io/os: linux
+   catalog.cattle.io/provides-gvr: resources.cattle.io.resourceset/v1
++  catalog.cattle.io/release-name: rancher-backup
+   catalog.cattle.io/scope: management
+-  catalog.cattle.io/display-name: "Rancher Backups"
+-  catalog.cattle.io/os: linux
+-  catalog.cattle.io/auto-install: rancher-backup-crd=match
++  catalog.cattle.io/ui-component: rancher-backup
++apiVersion: v1
++appVersion: v1.0.3
++description: Provides ability to back up and restore the Rancher application running
++  on any Kubernetes cluster
++icon: https://charts.rancher.io/assets/logos/backup-restore.svg
++keywords:
++- applications
++- infrastructure
++name: rancher-backup
++version: 1.0.30000-rc00
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-backup/charts-crd/Chart.yaml dev-v2.5-source-alt/charts/rancher-backup/charts-crd/Chart.yaml
+--- dev-v2.5-source/charts/rancher-backup/charts-crd/Chart.yaml	2021-01-15 14:07:36.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-backup/charts-crd/Chart.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -1,10 +1,10 @@
++annotations:
++  catalog.cattle.io/certified: rancher
++  catalog.cattle.io/hidden: "true"
++  catalog.cattle.io/namespace: cattle-resources-system
++  catalog.cattle.io/release-name: rancher-backup-crd
+ apiVersion: v1
+-version: 1.0.300
+ description: Installs the CRDs for rancher-backup.
+ name: rancher-backup-crd
+ type: application
+-annotations:
+-  catalog.cattle.io/hidden: "true"
+-  catalog.cattle.io/release-name: rancher-backup-crd
+-  catalog.cattle.io/certified: rancher
+-  catalog.cattle.io/namespace: cattle-resources-system
++version: 1.0.300-rc00
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-backup/templates/validate-install-crd.yaml dev-v2.5-source-alt/charts/rancher-backup/templates/validate-install-crd.yaml
+--- dev-v2.5-source/charts/rancher-backup/templates/validate-install-crd.yaml	2021-01-15 14:07:36.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-backup/templates/validate-install-crd.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -10,7 +10,7 @@
+ # {{- end -}}
+ # {{- range $_, $exists := $found -}}
+ # {{- if (eq $exists false) -}}
+-# 	{{- required "Required CRDs are missing. Please install the rancher-backup-crd chart before installing this chart." "" -}}
++# 	{{- required "Required CRDs are missing. Please install the corresponding CRD chart before installing this chart." "" -}}
+ # {{- end -}}
+ # {{- end -}}
+-#{{- end -}}
++#{{- end -}}
+\ No newline at end of file

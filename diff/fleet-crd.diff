@@ -1,0 +1,9 @@
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/fleet-crd/Chart.yaml dev-v2.5-source-alt/charts/fleet-crd/Chart.yaml
+--- dev-v2.5-source/charts/fleet-crd/Chart.yaml	2021-01-15 14:07:36.000000000 -0800
++++ dev-v2.5-source-alt/charts/fleet-crd/Chart.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -9,4 +9,4 @@
+ description: Fleet Manager CustomResourceDefinitions
+ icon: https://charts.rancher.io/assets/logos/fleet.svg
+ name: fleet-crd
+-version: 0.3.300
++version: 0.3.300-rc00

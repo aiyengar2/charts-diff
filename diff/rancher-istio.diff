@@ -1,0 +1,2392 @@
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/Chart.yaml dev-v2.5-source-alt/charts/rancher-istio/Chart.yaml
+--- dev-v2.5-source/charts/rancher-istio/Chart.yaml	2021-01-15 14:07:36.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/Chart.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -1,18 +1,19 @@
++annotations:
++  catalog.cattle.io/auto-install: rancher-kiali-server-crd=1.24.003
++  catalog.cattle.io/certified: rancher
++  catalog.cattle.io/display-name: Istio
++  catalog.cattle.io/namespace: istio-system
++  catalog.cattle.io/os: linux
++  catalog.cattle.io/provides-gvr: networking.istio.io.virtualservice/v1beta1
++  catalog.cattle.io/release-name: rancher-istio
++  catalog.cattle.io/ui-component: istio
+ apiVersion: v1
+ appVersion: 1.7.6
+-description: A basic Istio setup that installs with the istioctl. Refer to https://istio.io/latest/ for details.
+-name: rancher-istio
+-version: 1.7.600
++description: A basic Istio setup that installs with the istioctl. Refer to https://istio.io/latest/
++  for details.
+ icon: https://charts.rancher.io/assets/logos/istio.svg
+ keywords:
+ - networking
+ - infrastructure
+-annotations:
+-  catalog.cattle.io/certified: rancher
+-  catalog.cattle.io/namespace: istio-system
+-  catalog.cattle.io/release-name: rancher-istio
+-  catalog.cattle.io/ui-component: istio
+-  catalog.cattle.io/provides-gvr: networking.istio.io.virtualservice/v1beta1
+-  catalog.cattle.io/auto-install: rancher-kiali-server-crd=1.24.003
+-  catalog.cattle.io/display-name: "Istio"
+-  catalog.cattle.io/os: linux
++name: rancher-istio
++version: 1.7.600-rc00
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/Chart.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/Chart.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/Chart.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/Chart.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,31 @@
++annotations:
++  catalog.cattle.io/auto-install: rancher-kiali-server-crd=match
++  catalog.cattle.io/hidden: "true"
++  catalog.cattle.io/os: linux
++  catalog.cattle.io/provides-gvr: monitoringdashboards.monitoring.kiali.io/v1alpha1
++  catalog.cattle.io/requires-gvr: monitoring.coreos.com.prometheus/v1
++  catalog.rancher.io/namespace: cattle-istio-system
++  catalog.rancher.io/release-name: rancher-kiali-server
++apiVersion: v2
++appVersion: v1.24.0
++description: Kiali is an open source project for service mesh observability, refer
++  to https://www.kiali.io for details. This is installed as sub-chart with customized
++  values in Rancher's Istio.
++home: https://github.com/kiali/kiali
++icon: https://raw.githubusercontent.com/kiali/kiali.io/master/themes/kiali/static/img/kiali_logo_masthead.png
++keywords:
++- istio
++- kiali
++- networking
++- infrastructure
++maintainers:
++- email: kiali-users@googlegroups.com
++  name: Kiali
++  url: https://kiali.io
++name: rancher-kiali-server
++sources:
++- https://github.com/kiali/kiali
++- https://github.com/kiali/kiali-ui
++- https://github.com/kiali/kiali-operator
++- https://github.com/kiali/helm-charts
++version: 1.24.0
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/NOTES.txt dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/NOTES.txt
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/NOTES.txt	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/NOTES.txt	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,5 @@
++Welcome to Kiali! For more details on Kiali, see: https://kiali.io
++
++The Kiali Server [{{ .Chart.AppVersion }}] has been installed in namespace [{{ .Release.Namespace }}]. It will be ready soon.
++
++(Helm: Chart=[{{ .Chart.Name }}], Release=[{{ .Release.Name }}], Version=[{{ .Chart.Version }}])
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/_helpers.tpl dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/_helpers.tpl
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/_helpers.tpl	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/_helpers.tpl	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,176 @@
++{{/* vim: set filetype=mustache: */}}
++
++{{/*
++Expand the name of the chart.
++*/}}
++{{- define "kiali-server.name" -}}
++{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
++{{- end }}
++
++{{/*
++Create a default fully qualified app name.
++We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
++If release name contains chart name it will be used as a full name.
++*/}}
++{{- define "kiali-server.fullname" -}}
++{{- if .Values.fullnameOverride }}
++  {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
++{{- else }}
++  {{- $name := default .Chart.Name .Values.nameOverride }}
++  {{- printf "%s" $name | trunc 63 | trimSuffix "-" }}
++{{- end }}
++{{- end }}
++
++{{/*
++Create chart name and version as used by the chart label.
++*/}}
++{{- define "kiali-server.chart" -}}
++{{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
++{{- end }}
++
++{{/*
++Common labels
++*/}}
++{{- define "kiali-server.labels" -}}
++helm.sh/chart: {{ include "kiali-server.chart" . }}
++app: {{ include "kiali-server.name" . }}
++{{ include "kiali-server.selectorLabels" . }}
++version: {{ .Values.deployment.version_label | default .Chart.AppVersion | quote }}
++app.kubernetes.io/version: {{ .Values.deployment.version_label | default .Chart.AppVersion | quote }}
++app.kubernetes.io/managed-by: {{ .Release.Service }}
++{{- end }}
++
++{{/*
++Selector labels
++*/}}
++{{- define "kiali-server.selectorLabels" -}}
++app.kubernetes.io/name: {{ include "kiali-server.name" . }}
++app.kubernetes.io/instance: {{ .Release.Name }}
++{{- end }}
++
++{{/*
++Used to determine if a custom dashboard (defined in .Template.Name) should be deployed.
++*/}}
++{{- define "kiali-server.isDashboardEnabled" -}}
++{{- $includere := "" }}
++{{- range $_, $s := .Values.deployment.custom_dashboards.includes }}
++  {{- if $s }}
++    {{- if $includere }}
++      {{- $includere = printf "%s|^%s$" $includere ($s | replace "*" ".*" | replace "?" ".") }}
++    {{- else }}
++      {{- $includere = printf "^%s$" ($s | replace "*" ".*" | replace "?" ".") }}
++    {{- end }}
++  {{- end }}
++{{- end }}
++{{- $excludere := "" }}
++{{- range $_, $s := .Values.deployment.custom_dashboards.excludes }}
++  {{- if $s }}
++    {{- if $excludere }}
++      {{- $excludere = printf "%s|^%s$" $excludere ($s | replace "*" ".*" | replace "?" ".") }}
++    {{- else }}
++      {{- $excludere = printf "^%s$" ($s | replace "*" ".*" | replace "?" ".") }}
++    {{- end }}
++  {{- end }}
++{{- end }}
++{{- if (and (mustRegexMatch (default "no-matches" $includere) (base .Template.Name)) (not (mustRegexMatch (default "no-matches" $excludere) (base .Template.Name)))) }}
++  {{- print "enabled" }}
++{{- else }}
++  {{- print "" }}
++{{- end }}
++{{- end }}
++
++{{/*
++Determine the default login token signing key.
++*/}}
++{{- define "kiali-server.login_token.signing_key" -}}
++{{- if .Values.login_token.signing_key }}
++  {{- .Values.login_token.signing_key }}
++{{- else }}
++  {{- randAlphaNum 16 }}
++{{- end }}
++{{- end }}
++
++{{/*
++Determine the default web root.
++*/}}
++{{- define "kiali-server.server.web_root" -}}
++{{- if .Values.server.web_root  }}
++  {{- .Values.server.web_root | trimSuffix "/" }}
++{{- else }}
++  {{- if .Capabilities.APIVersions.Has "route.openshift.io/v1" }}
++    {{- "/" }}
++  {{- else }}
++    {{- "/kiali" }}
++  {{- end }}
++{{- end }}
++{{- end }}
++
++{{/*
++Determine the default identity cert file. There is no default if on k8s; only on OpenShift.
++*/}}
++{{- define "kiali-server.identity.cert_file" -}}
++{{- if hasKey .Values.identity "cert_file" }}
++  {{- .Values.identity.cert_file }}
++{{- else }}
++  {{- if .Capabilities.APIVersions.Has "route.openshift.io/v1" }}
++    {{- "/kiali-cert/tls.crt" }}
++  {{- else }}
++    {{- "" }}
++  {{- end }}
++{{- end }}
++{{- end }}
++
++{{/*
++Determine the default identity private key file. There is no default if on k8s; only on OpenShift.
++*/}}
++{{- define "kiali-server.identity.private_key_file" -}}
++{{- if hasKey .Values.identity "private_key_file" }}
++  {{- .Values.identity.private_key_file }}
++{{- else }}
++  {{- if .Capabilities.APIVersions.Has "route.openshift.io/v1" }}
++    {{- "/kiali-cert/tls.key" }}
++  {{- else }}
++    {{- "" }}
++  {{- end }}
++{{- end }}
++{{- end }}
++
++{{/*
++Determine the istio namespace - default is where Kiali is installed.
++*/}}
++{{- define "kiali-server.istio_namespace" -}}
++{{- if .Values.istio_namespace }}
++  {{- .Values.istio_namespace }}
++{{- else }}
++  {{- .Release.Namespace }}
++{{- end }}
++{{- end }}
++
++{{/*
++Determine the auth strategy to use - default is "token" on Kubernetes and "openshift" on OpenShift.
++*/}}
++{{- define "kiali-server.auth.strategy" -}}
++{{- if .Values.auth.strategy }}
++  {{- if (and (eq .Values.auth.strategy "openshift") (not .Values.kiali_route_url)) }}
++    {{- fail "You did not define what the Kiali Route URL will be (--set kiali_route_url=...). Without this set, the openshift auth strategy will not work. Either set that or use a different auth strategy via the --set auth.strategy=... option." }}
++  {{- end }}
++  {{- .Values.auth.strategy }}
++{{- else }}
++  {{- if .Capabilities.APIVersions.Has "route.openshift.io/v1" }}
++    {{- if not .Values.kiali_route_url }}
++      {{- fail "You did not define what the Kiali Route URL will be (--set kiali_route_url=...). Without this set, the openshift auth strategy will not work. Either set that or explicitly indicate another auth strategy you want via the --set auth.strategy=... option." }}
++    {{- end }}
++    {{- "openshift" }}
++  {{- else }}
++    {{- "token" }}
++  {{- end }}
++{{- end }}
++{{- end }}
++
++{{- define "system_default_registry" -}}
++{{- if .Values.global.cattle.systemDefaultRegistry -}}
++{{- printf "%s/" .Values.global.cattle.systemDefaultRegistry -}}
++{{- else -}}
++{{- "" -}}
++{{- end -}}
++{{- end -}}
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/cabundle.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/cabundle.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/cabundle.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/cabundle.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,13 @@
++{{- if .Capabilities.APIVersions.Has "route.openshift.io/v1" }}
++---
++apiVersion: v1
++kind: ConfigMap
++metadata:
++  name: {{ include "kiali-server.fullname" . }}-cabundle
++  namespace: {{ .Release.Namespace }}
++  labels:
++    {{- include "kiali-server.labels" . | nindent 4 }}
++  annotations:
++    service.beta.openshift.io/inject-cabundle: "true"
++...
++{{- end }}
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/configmap.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/configmap.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/configmap.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/configmap.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,24 @@
++---
++apiVersion: v1
++kind: ConfigMap
++metadata:
++  name: {{ include "kiali-server.fullname" . }}
++  namespace: {{ .Release.Namespace }}
++  labels:
++    {{- include "kiali-server.labels" . | nindent 4 }}
++data:
++  config.yaml: |
++    {{- /* Most of .Values is simply the ConfigMap - strip out the keys that are not part of the ConfigMap */}}
++    {{- $cm := omit .Values "nameOverride" "fullnameOverride" "kiali_route_url" }}
++    {{- /* The helm chart defines namespace for us, but pass it to the ConfigMap in case the server needs it */}}
++    {{- $_ := set $cm.deployment "namespace" .Release.Namespace }}
++    {{- /* Some values of the ConfigMap are generated, but might not be identical, from .Values */}}
++    {{- $_ := set $cm "istio_namespace" (include "kiali-server.istio_namespace" .) }}
++    {{- $_ := set $cm.auth "strategy" (include "kiali-server.auth.strategy" .) }}
++    {{- $_ := set $cm.auth.openshift "client_id_prefix" (include "kiali-server.fullname" .) }}
++    {{- $_ := set $cm.identity "cert_file" (include "kiali-server.identity.cert_file" .) }}
++    {{- $_ := set $cm.identity "private_key_file" (include "kiali-server.identity.private_key_file" .) }}
++    {{- $_ := set $cm.login_token "signing_key" (include "kiali-server.login_token.signing_key" .) }}
++    {{- $_ := set $cm.server "web_root" (include "kiali-server.server.web_root" .) }}
++    {{- toYaml $cm | nindent 4 }}
++...
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/envoy.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/envoy.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/envoy.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/envoy.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,55 @@
++{{- if (include "kiali-server.isDashboardEnabled" .) }}
++---
++apiVersion: "monitoring.kiali.io/v1alpha1"
++kind: MonitoringDashboard
++metadata:
++  name: envoy
++  labels:
++  {{- include "kiali-server.labels" . | nindent 4 }}
++spec:
++  title: Envoy Metrics
++#  discoverOn: "envoy_server_uptime"
++  items:
++  - chart:
++      name: "Pods uptime"
++      spans: 4
++      metricName: "envoy_server_uptime"
++      dataType: "raw"
++  - chart:
++      name: "Allocated memory"
++      unit: "bytes"
++      spans: 4
++      metricName: "envoy_server_memory_allocated"
++      dataType: "raw"
++      min: 0
++  - chart:
++      name: "Heap size"
++      unit: "bytes"
++      spans: 4
++      metricName: "envoy_server_memory_heap_size"
++      dataType: "raw"
++      min: 0
++  - chart:
++      name: "Upstream active connections"
++      spans: 6
++      metricName: "envoy_cluster_upstream_cx_active"
++      dataType: "raw"
++  - chart:
++      name: "Upstream total requests"
++      spans: 6
++      metricName: "envoy_cluster_upstream_rq_total"
++      unit: "rps"
++      dataType: "rate"
++  - chart:
++      name: "Downstream active connections"
++      spans: 6
++      metricName: "envoy_listener_downstream_cx_active"
++      dataType: "raw"
++  - chart:
++      name: "Downstream HTTP requests"
++      spans: 6
++      metricName: "envoy_listener_http_downstream_rq"
++      unit: "rps"
++      dataType: "rate"
++...
++{{- end }}
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/go.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/go.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/go.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/go.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,66 @@
++{{- if (include "kiali-server.isDashboardEnabled" .) }}
++---
++apiVersion: "monitoring.kiali.io/v1alpha1"
++kind: MonitoringDashboard
++metadata:
++  name: go
++  labels:
++  {{- include "kiali-server.labels" . | nindent 4 }}
++spec:
++  title: Go Metrics
++  runtime: Go
++  discoverOn: "go_info"
++  items:
++  - chart:
++      name: "CPU ratio"
++      spans: 6
++      metricName: "process_cpu_seconds_total"
++      dataType: "rate"
++      aggregations:
++      - label: "pod_name"
++        displayName: "Pod"
++  - chart:
++      name: "RSS Memory"
++      unit: "bytes"
++      spans: 6
++      metricName: "process_resident_memory_bytes"
++      dataType: "raw"
++      aggregations:
++      - label: "pod_name"
++        displayName: "Pod"
++  - chart:
++      name: "Goroutines"
++      spans: 6
++      metricName: "go_goroutines"
++      dataType: "raw"
++      aggregations:
++      - label: "pod_name"
++        displayName: "Pod"
++  - chart:
++      name: "Heap allocation rate"
++      unit: "bytes/s"
++      spans: 6
++      metricName: "go_memstats_alloc_bytes_total"
++      dataType: "rate"
++      aggregations:
++      - label: "pod_name"
++        displayName: "Pod"
++  - chart:
++      name: "GC rate"
++      spans: 6
++      metricName: "go_gc_duration_seconds_count"
++      dataType: "rate"
++      aggregations:
++      - label: "pod_name"
++        displayName: "Pod"
++  - chart:
++      name: "Next GC"
++      unit: "bytes"
++      spans: 6
++      metricName: "go_memstats_next_gc_bytes"
++      dataType: "raw"
++      aggregations:
++      - label: "pod_name"
++        displayName: "Pod"
++...
++{{- end }}
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/kiali.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/kiali.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/kiali.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/kiali.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,43 @@
++{{- if (include "kiali-server.isDashboardEnabled" .) }}
++---
++apiVersion: "monitoring.kiali.io/v1alpha1"
++kind: MonitoringDashboard
++metadata:
++  name: kiali
++  labels:
++  {{- include "kiali-server.labels" . | nindent 4 }}
++spec:
++  title: Kiali Internal Metrics
++  items:
++  - chart:
++      name: "API processing duration"
++      unit: "seconds"
++      spans: 6
++      metricName: "kiali_api_processing_duration_seconds"
++      dataType: "histogram"
++      aggregations:
++      - label: "route"
++        displayName: "Route"
++  - chart:
++      name: "Functions processing duration"
++      unit: "seconds"
++      spans: 6
++      metricName: "kiali_go_function_processing_duration_seconds"
++      dataType: "histogram"
++      aggregations:
++      - label: "function"
++        displayName: "Function"
++      - label: "package"
++        displayName: "Package"
++  - chart:
++      name: "Failures"
++      spans: 12
++      metricName: "kiali_go_function_failures_total"
++      dataType: "raw"
++      aggregations:
++      - label: "function"
++        displayName: "Function"
++      - label: "package"
++        displayName: "Package"
++...
++{{- end }}
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/micrometer-1.0.6-jvm-pool.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/micrometer-1.0.6-jvm-pool.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/micrometer-1.0.6-jvm-pool.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/micrometer-1.0.6-jvm-pool.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,42 @@
++{{- if (include "kiali-server.isDashboardEnabled" .) }}
++---
++apiVersion: "monitoring.kiali.io/v1alpha1"
++kind: MonitoringDashboard
++metadata:
++  name: micrometer-1.0.6-jvm-pool
++  labels:
++  {{- include "kiali-server.labels" . | nindent 4 }}
++spec:
++  runtime: JVM
++  title: JVM Pool Metrics
++  discoverOn: "jvm_buffer_total_capacity_bytes"
++  items:
++  - chart:
++      name: "Pool buffer memory used"
++      unit: "bytes"
++      spans: 4
++      metricName: "jvm_buffer_memory_used_bytes"
++      dataType: "raw"
++      aggregations:
++      - label: "id"
++        displayName: "Pool"
++  - chart:
++      name: "Pool buffer capacity"
++      unit: "bytes"
++      spans: 4
++      metricName: "jvm_buffer_total_capacity_bytes"
++      dataType: "raw"
++      aggregations:
++      - label: "id"
++        displayName: "Pool"
++  - chart:
++      name: "Pool buffer count"
++      unit: "bytes"
++      spans: 4
++      metricName: "jvm_buffer_count"
++      dataType: "raw"
++      aggregations:
++      - label: "id"
++        displayName: "Pool"
++...
++{{- end }}
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/micrometer-1.0.6-jvm.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/micrometer-1.0.6-jvm.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/micrometer-1.0.6-jvm.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/micrometer-1.0.6-jvm.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,64 @@
++{{- if (include "kiali-server.isDashboardEnabled" .) }}
++---
++apiVersion: "monitoring.kiali.io/v1alpha1"
++kind: MonitoringDashboard
++metadata:
++  name: micrometer-1.0.6-jvm
++  labels:
++  {{- include "kiali-server.labels" . | nindent 4 }}
++spec:
++  runtime: JVM
++  title: JVM Metrics
++  discoverOn: "jvm_threads_live"
++  items:
++  - chart:
++      name: "Total live threads"
++      spans: 4
++      metricName: "jvm_threads_live"
++      dataType: "raw"
++  - chart:
++      name: "Daemon threads"
++      spans: 4
++      metricName: "jvm_threads_daemon"
++      dataType: "raw"
++  - chart:
++      name: "Loaded classes"
++      spans: 4
++      metricName: "jvm_classes_loaded"
++      dataType: "raw"
++
++  - chart:
++      name: "Memory used"
++      unit: "bytes"
++      spans: 4
++      metricName: "jvm_memory_used_bytes"
++      dataType: "raw"
++      aggregations:
++      - label: "area"
++        displayName: "Area"
++      - label: "id"
++        displayName: "Space"
++  - chart:
++      name: "Memory commited"
++      unit: "bytes"
++      spans: 4
++      metricName: "jvm_memory_committed_bytes"
++      dataType: "raw"
++      aggregations:
++      - label: "area"
++        displayName: "Area"
++      - label: "id"
++        displayName: "Space"
++  - chart:
++      name: "Memory max"
++      unit: "bytes"
++      spans: 4
++      metricName: "jvm_memory_max_bytes"
++      dataType: "raw"
++      aggregations:
++      - label: "area"
++        displayName: "Area"
++      - label: "id"
++        displayName: "Space"
++...
++{{- end }}
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/micrometer-1.1-jvm.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/micrometer-1.1-jvm.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/micrometer-1.1-jvm.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/micrometer-1.1-jvm.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,67 @@
++{{- if (include "kiali-server.isDashboardEnabled" .) }}
++---
++apiVersion: "monitoring.kiali.io/v1alpha1"
++kind: MonitoringDashboard
++metadata:
++  name: micrometer-1.1-jvm
++  labels:
++  {{- include "kiali-server.labels" . | nindent 4 }}
++spec:
++  runtime: JVM
++  title: JVM Metrics
++  discoverOn: "jvm_threads_live_threads"
++  items:
++  - chart:
++      name: "Memory used"
++      unit: "bytes"
++      spans: 4
++      metricName: "jvm_memory_used_bytes"
++      dataType: "raw"
++      aggregations:
++      - label: "area"
++        displayName: "Area"
++      - label: "id"
++        displayName: "Space"
++  - chart:
++      name: "Memory commited"
++      unit: "bytes"
++      spans: 4
++      metricName: "jvm_memory_committed_bytes"
++      dataType: "raw"
++      aggregations:
++      - label: "area"
++        displayName: "Area"
++      - label: "id"
++        displayName: "Space"
++  - chart:
++      name: "Memory max"
++      unit: "bytes"
++      spans: 4
++      metricName: "jvm_memory_max_bytes"
++      dataType: "raw"
++      aggregations:
++      - label: "area"
++        displayName: "Area"
++      - label: "id"
++        displayName: "Space"
++
++  - chart:
++      name: "Total live threads"
++      spans: 4
++      metricName: "jvm_threads_live_threads"
++      dataType: "raw"
++  - chart:
++      name: "Daemon threads"
++      spans: 4
++      metricName: "jvm_threads_daemon_threads"
++      dataType: "raw"
++  - chart:
++      name: "Threads states"
++      spans: 4
++      metricName: "jvm_threads_states_threads"
++      dataType: "raw"
++      aggregations:
++      - label: "state"
++        displayName: "State"
++...
++{{- end }}
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/microprofile-1.1.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/microprofile-1.1.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/microprofile-1.1.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/microprofile-1.1.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,58 @@
++{{- if (include "kiali-server.isDashboardEnabled" .) }}
++---
++apiVersion: "monitoring.kiali.io/v1alpha1"
++kind: MonitoringDashboard
++metadata:
++  name: microprofile-1.1
++  labels:
++  {{- include "kiali-server.labels" . | nindent 4 }}
++spec:
++  title: MicroProfile Metrics
++  runtime: MicroProfile
++  discoverOn: "base:thread_count"
++  items:
++  - chart:
++      name: "Current loaded classes"
++      spans: 6
++      metricName: "base:classloader_current_loaded_class_count"
++      dataType: "raw"
++  - chart:
++      name: "Unloaded classes"
++      spans: 6
++      metricName: "base:classloader_total_unloaded_class_count"
++      dataType: "raw"
++  - chart:
++      name: "Thread count"
++      spans: 4
++      metricName: "base:thread_count"
++      dataType: "raw"
++  - chart:
++      name: "Thread max count"
++      spans: 4
++      metricName: "base:thread_max_count"
++      dataType: "raw"
++  - chart:
++      name: "Thread daemon count"
++      spans: 4
++      metricName: "base:thread_daemon_count"
++      dataType: "raw"
++  - chart:
++      name: "Committed heap"
++      unit: "bytes"
++      spans: 4
++      metricName: "base:memory_committed_heap_bytes"
++      dataType: "raw"
++  - chart:
++      name: "Max heap"
++      unit: "bytes"
++      spans: 4
++      metricName: "base:memory_max_heap_bytes"
++      dataType: "raw"
++  - chart:
++      name: "Used heap"
++      unit: "bytes"
++      spans: 4
++      metricName: "base:memory_used_heap_bytes"
++      dataType: "raw"
++...
++{{- end }}
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/microprofile-x.y.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/microprofile-x.y.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/microprofile-x.y.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/microprofile-x.y.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,37 @@
++{{- if (include "kiali-server.isDashboardEnabled" .) }}
++---
++apiVersion: "monitoring.kiali.io/v1alpha1"
++kind: MonitoringDashboard
++metadata:
++  name: microprofile-x.y
++  labels:
++  {{- include "kiali-server.labels" . | nindent 4 }}
++spec:
++  title: MicroProfile Metrics
++  runtime: MicroProfile
++  discoverOn: "base:gc_complete_scavenger_count"
++  items:
++  - chart:
++      name: "Young GC time"
++      unit: "seconds"
++      spans: 3
++      metricName: "base:gc_young_generation_scavenger_time_seconds"
++      dataType: "raw"
++  - chart:
++      name: "Young GC count"
++      spans: 3
++      metricName: "base:gc_young_generation_scavenger_count"
++      dataType: "raw"
++  - chart:
++      name: "Total GC time"
++      unit: "seconds"
++      spans: 3
++      metricName: "base:gc_complete_scavenger_time_seconds"
++      dataType: "raw"
++  - chart:
++      name: "Total GC count"
++      spans: 3
++      metricName: "base:gc_complete_scavenger_count"
++      dataType: "raw"
++...
++{{- end }}
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/nodejs.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/nodejs.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/nodejs.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/nodejs.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,58 @@
++{{- if (include "kiali-server.isDashboardEnabled" .) }}
++---
++apiVersion: "monitoring.kiali.io/v1alpha1"
++kind: MonitoringDashboard
++metadata:
++  name: nodejs
++  labels:
++  {{- include "kiali-server.labels" . | nindent 4 }}
++spec:
++  runtime: Node.js
++  title: Node.js Metrics
++  discoverOn: "nodejs_active_handles_total"
++  items:
++  - chart:
++      name: "Active handles"
++      spans: 4
++      metricName: "nodejs_active_handles_total"
++      dataType: "raw"
++  - chart:
++      name: "Active requests"
++      spans: 4
++      metricName: "nodejs_active_requests_total"
++      dataType: "raw"
++  - chart:
++      name: "Event loop lag"
++      unit: "seconds"
++      spans: 4
++      metricName: "nodejs_eventloop_lag_seconds"
++      dataType: "raw"
++  - chart:
++      name: "Total heap size"
++      unit: "bytes"
++      spans: 12
++      metricName: "nodejs_heap_space_size_total_bytes"
++      dataType: "raw"
++      aggregations:
++      - label: "space"
++        displayName: "Space"
++  - chart:
++      name: "Used heap size"
++      unit: "bytes"
++      spans: 6
++      metricName: "nodejs_heap_space_size_used_bytes"
++      dataType: "raw"
++      aggregations:
++      - label: "space"
++        displayName: "Space"
++  - chart:
++      name: "Available heap size"
++      unit: "bytes"
++      spans: 6
++      metricName: "nodejs_heap_space_size_available_bytes"
++      dataType: "raw"
++      aggregations:
++      - label: "space"
++        displayName: "Space"
++...
++{{- end }}
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/quarkus.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/quarkus.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/quarkus.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/quarkus.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,32 @@
++{{- if (include "kiali-server.isDashboardEnabled" .) }}
++---
++apiVersion: "monitoring.kiali.io/v1alpha1"
++kind: MonitoringDashboard
++metadata:
++  name: quarkus
++  labels:
++  {{- include "kiali-server.labels" . | nindent 4 }}
++spec:
++  title: Quarkus Metrics
++  runtime: Quarkus
++  items:
++  - chart:
++      name: "Thread count"
++      spans: 4
++      metricName: "vendor:thread_count"
++      dataType: "raw"
++  - chart:
++      name: "Used heap"
++      unit: "bytes"
++      spans: 4
++      metricName: "vendor:memory_heap_usage_bytes"
++      dataType: "raw"
++  - chart:
++      name: "Used non-heap"
++      unit: "bytes"
++      spans: 4
++      metricName: "vendor:memory_non_heap_usage_bytes"
++      dataType: "raw"
++  - include: "microprofile-x.y"
++...
++{{- end }}
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/springboot-jvm-pool.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/springboot-jvm-pool.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/springboot-jvm-pool.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/springboot-jvm-pool.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,15 @@
++{{- if (include "kiali-server.isDashboardEnabled" .) }}
++---
++apiVersion: "monitoring.kiali.io/v1alpha1"
++kind: MonitoringDashboard
++metadata:
++  name: springboot-jvm-pool
++  labels:
++  {{- include "kiali-server.labels" . | nindent 4 }}
++spec:
++  runtime: Spring Boot
++  title: JVM Pool Metrics
++  items:
++  - include: "micrometer-1.0.6-jvm-pool"
++...
++{{- end }}
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/springboot-jvm.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/springboot-jvm.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/springboot-jvm.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/springboot-jvm.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,15 @@
++{{- if (include "kiali-server.isDashboardEnabled" .) }}
++---
++apiVersion: "monitoring.kiali.io/v1alpha1"
++kind: MonitoringDashboard
++metadata:
++  name: springboot-jvm
++  labels:
++  {{- include "kiali-server.labels" . | nindent 4 }}
++spec:
++  runtime: Spring Boot
++  title: JVM Metrics
++  items:
++  - include: "micrometer-1.0.6-jvm"
++...
++{{- end }}
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/springboot-tomcat.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/springboot-tomcat.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/springboot-tomcat.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/springboot-tomcat.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,15 @@
++{{- if (include "kiali-server.isDashboardEnabled" .) }}
++---
++apiVersion: "monitoring.kiali.io/v1alpha1"
++kind: MonitoringDashboard
++metadata:
++  name: springboot-tomcat
++  labels:
++  {{- include "kiali-server.labels" . | nindent 4 }}
++spec:
++  runtime: Spring Boot
++  title: Tomcat Metrics
++  items:
++  - include: "tomcat"
++...
++{{- end }}
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/thorntail.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/thorntail.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/thorntail.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/thorntail.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,21 @@
++{{- if (include "kiali-server.isDashboardEnabled" .) }}
++---
++apiVersion: "monitoring.kiali.io/v1alpha1"
++kind: MonitoringDashboard
++metadata:
++  name: thorntail
++  labels:
++  {{- include "kiali-server.labels" . | nindent 4 }}
++spec:
++  runtime: Thorntail
++  title: Thorntail Metrics
++  discoverOn: "vendor:loaded_modules"
++  items:
++  - include: "microprofile-1.1"
++  - chart:
++      name: "Loaded modules"
++      spans: 6
++      metricName: "vendor:loaded_modules"
++      dataType: "raw"
++...
++{{- end }}
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/tomcat.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/tomcat.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/tomcat.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/tomcat.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,66 @@
++{{- if (include "kiali-server.isDashboardEnabled" .) }}
++---
++apiVersion: "monitoring.kiali.io/v1alpha1"
++kind: MonitoringDashboard
++metadata:
++  name: tomcat
++  labels:
++  {{- include "kiali-server.labels" . | nindent 4 }}
++spec:
++  runtime: Tomcat
++  title: Tomcat Metrics
++  discoverOn: "tomcat_sessions_created_total"
++  items:
++  - chart:
++      name: "Sessions created"
++      spans: 4
++      metricName: "tomcat_sessions_created_total"
++      dataType: "raw"
++  - chart:
++      name: "Active sessions"
++      spans: 4
++      metricName: "tomcat_sessions_active_current"
++      dataType: "raw"
++  - chart:
++      name: "Sessions rejected"
++      spans: 4
++      metricName: "tomcat_sessions_rejected_total"
++      dataType: "raw"
++
++  - chart:
++      name: "Bytes sent"
++      unit: "bitrate"
++      spans: 6
++      metricName: "tomcat_global_sent_bytes_total"
++      dataType: "rate"
++      aggregations:
++      - label: "name"
++        displayName: "Name"
++  - chart:
++      name: "Bytes received"
++      unit: "bitrate"
++      spans: 6
++      metricName: "tomcat_global_received_bytes_total"
++      dataType: "rate"
++      aggregations:
++      - label: "name"
++        displayName: "Name"
++
++  - chart:
++      name: "Global errors"
++      spans: 6
++      metricName: "tomcat_global_error_total"
++      dataType: "raw"
++      aggregations:
++      - label: "name"
++        displayName: "Name"
++  - chart:
++      name: "Servlet errors"
++      spans: 6
++      metricName: "tomcat_servlet_error_total"
++      dataType: "raw"
++      aggregations:
++      - label: "name"
++        displayName: "Name"
++...
++{{- end }}
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/vertx-client.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/vertx-client.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/vertx-client.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/vertx-client.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,59 @@
++{{- if (include "kiali-server.isDashboardEnabled" .) }}
++---
++apiVersion: "monitoring.kiali.io/v1alpha1"
++kind: MonitoringDashboard
++metadata:
++  name: vertx-client
++  labels:
++  {{- include "kiali-server.labels" . | nindent 4 }}
++spec:
++  runtime: Vert.x
++  title: Vert.x Client Metrics
++  discoverOn: "vertx_http_client_connections"
++  items:
++  - chart:
++      name: "Client response time"
++      unit: "seconds"
++      spans: 6
++      metricName: "vertx_http_client_responseTime_seconds"
++      dataType: "histogram"
++      aggregations:
++      - label: "path"
++        displayName: "Path"
++      - label: "method"
++        displayName: "Method"
++  - chart:
++      name: "Client request count rate"
++      unit: "ops"
++      spans: 6
++      metricName: "vertx_http_client_requestCount_total"
++      dataType: "rate"
++      aggregations:
++      - label: "path"
++        displayName: "Path"
++      - label: "method"
++        displayName: "Method"
++  - chart:
++      name: "Client active connections"
++      spans: 6
++      metricName: "vertx_http_client_connections"
++      dataType: "raw"
++  - chart:
++      name: "Client active websockets"
++      spans: 6
++      metricName: "vertx_http_client_wsConnections"
++      dataType: "raw"
++  - chart:
++      name: "Client bytes sent"
++      unit: "bytes"
++      spans: 6
++      metricName: "vertx_http_client_bytesSent"
++      dataType: "histogram"
++  - chart:
++      name: "Client bytes received"
++      unit: "bytes"
++      spans: 6
++      metricName: "vertx_http_client_bytesReceived"
++      dataType: "histogram"
++...
++{{- end }}
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/vertx-eventbus.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/vertx-eventbus.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/vertx-eventbus.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/vertx-eventbus.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,58 @@
++{{- if (include "kiali-server.isDashboardEnabled" .) }}
++---
++apiVersion: "monitoring.kiali.io/v1alpha1"
++kind: MonitoringDashboard
++metadata:
++  name: vertx-eventbus
++  labels:
++  {{- include "kiali-server.labels" . | nindent 4 }}
++spec:
++  runtime: Vert.x
++  title: Vert.x Eventbus Metrics
++  discoverOn: "vertx_eventbus_handlers"
++  items:
++  - chart:
++      name: "Event bus handlers"
++      spans: 6
++      metricName: "vertx_eventbus_handlers"
++      dataType: "raw"
++      aggregations:
++      - label: "address"
++        displayName: "Eventbus address"
++  - chart:
++      name: "Event bus pending messages"
++      spans: 6
++      metricName: "vertx_eventbus_pending"
++      dataType: "raw"
++      aggregations:
++      - label: "address"
++        displayName: "Eventbus address"
++  - chart:
++      name: "Event bus processing time"
++      unit: "seconds"
++      spans: 6
++      metricName: "vertx_eventbus_processingTime_seconds"
++      dataType: "histogram"
++      aggregations:
++      - label: "address"
++        displayName: "Eventbus address"
++  - chart:
++      name: "Event bus bytes read"
++      unit: "bytes"
++      spans: 6
++      metricName: "vertx_eventbus_bytesRead"
++      dataType: "histogram"
++      aggregations:
++      - label: "address"
++        displayName: "Eventbus address"
++  - chart:
++      name: "Event bus bytes written"
++      unit: "bytes"
++      spans: 6
++      metricName: "vertx_eventbus_bytesWritten"
++      dataType: "histogram"
++      aggregations:
++      - label: "address"
++        displayName: "Eventbus address"
++...
++{{- end }}
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/vertx-jvm.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/vertx-jvm.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/vertx-jvm.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/vertx-jvm.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,15 @@
++{{- if (include "kiali-server.isDashboardEnabled" .) }}
++---
++apiVersion: "monitoring.kiali.io/v1alpha1"
++kind: MonitoringDashboard
++metadata:
++  name: vertx-jvm
++  labels:
++  {{- include "kiali-server.labels" . | nindent 4 }}
++spec:
++  runtime: Vert.x
++  title: JVM Metrics
++  items:
++  - include: "micrometer-1.1-jvm"
++...
++{{- end }}
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/vertx-pool.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/vertx-pool.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/vertx-pool.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/vertx-pool.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,67 @@
++{{- if (include "kiali-server.isDashboardEnabled" .) }}
++---
++apiVersion: "monitoring.kiali.io/v1alpha1"
++kind: MonitoringDashboard
++metadata:
++  name: vertx-pool
++  labels:
++  {{- include "kiali-server.labels" . | nindent 4 }}
++spec:
++  runtime: Vert.x
++  title: Vert.x Pools Metrics
++  discoverOn: "vertx_pool_ratio"
++  items:
++  - chart:
++      name: "Usage duration"
++      unit: "seconds"
++      spans: 6
++      metricName: "vertx_pool_usage_seconds"
++      dataType: "histogram"
++      aggregations:
++      - label: "pool_name"
++        displayName: "Name"
++      - label: "pool_type"
++        displayName: "Type"
++  - chart:
++      name: "Usage ratio"
++      spans: 6
++      metricName: "vertx_pool_ratio"
++      dataType: "raw"
++      aggregations:
++      - label: "pool_name"
++        displayName: "Name"
++      - label: "pool_type"
++        displayName: "Type"
++  - chart:
++      name: "Queue size"
++      spans: 6
++      metricName: "vertx_pool_queue_size"
++      dataType: "raw"
++      aggregations:
++      - label: "pool_name"
++        displayName: "Name"
++      - label: "pool_type"
++        displayName: "Type"
++  - chart:
++      name: "Time in queue"
++      unit: "seconds"
++      spans: 6
++      metricName: "vertx_pool_queue_delay_seconds"
++      dataType: "histogram"
++      aggregations:
++      - label: "pool_name"
++        displayName: "Name"
++      - label: "pool_type"
++        displayName: "Type"
++  - chart:
++      name: "Resources used"
++      spans: 6
++      metricName: "vertx_pool_inUse"
++      dataType: "raw"
++      aggregations:
++      - label: "pool_name"
++        displayName: "Name"
++      - label: "pool_type"
++        displayName: "Type"
++...
++{{- end }}
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/vertx-server.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/vertx-server.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/vertx-server.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/dashboards/vertx-server.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,61 @@
++{{- if (include "kiali-server.isDashboardEnabled" .) }}
++---
++apiVersion: "monitoring.kiali.io/v1alpha1"
++kind: MonitoringDashboard
++metadata:
++  name: vertx-server
++  labels:
++  {{- include "kiali-server.labels" . | nindent 4 }}
++spec:
++  runtime: Vert.x
++  title: Vert.x Server Metrics
++  discoverOn: "vertx_http_server_connections"
++  items:
++  - chart:
++      name: "Server response time"
++      unit: "seconds"
++      spans: 6
++      metricName: "vertx_http_server_responseTime_seconds"
++      dataType: "histogram"
++      aggregations:
++      - label: "path"
++        displayName: "Path"
++      - label: "method"
++        displayName: "Method"
++  - chart:
++      name: "Server request count rate"
++      unit: "ops"
++      spans: 6
++      metricName: "vertx_http_server_requestCount_total"
++      dataType: "rate"
++      aggregations:
++      - label: "code"
++        displayName: "Error code"
++      - label: "path"
++        displayName: "Path"
++      - label: "method"
++        displayName: "Method"
++  - chart:
++      name: "Server active connections"
++      spans: 6
++      metricName: "vertx_http_server_connections"
++      dataType: "raw"
++  - chart:
++      name: "Server active websockets"
++      spans: 6
++      metricName: "vertx_http_server_wsConnections"
++      dataType: "raw"
++  - chart:
++      name: "Server bytes sent"
++      unit: "bytes"
++      spans: 6
++      metricName: "vertx_http_server_bytesSent"
++      dataType: "histogram"
++  - chart:
++      name: "Server bytes received"
++      unit: "bytes"
++      spans: 6
++      metricName: "vertx_http_server_bytesReceived"
++      dataType: "histogram"
++...
++{{- end }}
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/deployment.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/deployment.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/deployment.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/deployment.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,165 @@
++---
++apiVersion: apps/v1
++kind: Deployment
++metadata:
++  name: {{ include "kiali-server.fullname" . }}
++  namespace: {{ .Release.Namespace }}
++  labels:
++    {{- include "kiali-server.labels" . | nindent 4 }}
++spec:
++  replicas: {{ .Values.deployment.replicas }}
++  selector:
++    matchLabels:
++      {{- include "kiali-server.selectorLabels" . | nindent 6 }}
++  strategy:
++    rollingUpdate:
++      maxSurge: 1
++      maxUnavailable: 1
++    type: RollingUpdate
++  template:
++    metadata:
++      name: {{ include "kiali-server.fullname" . }}
++      labels:
++        {{- include "kiali-server.labels" . | nindent 8 }}
++      annotations:
++        {{- if .Values.server.metrics_enabled }}
++        prometheus.io/scrape: "true"
++        prometheus.io/port: {{ .Values.server.metrics_port | quote }}
++        {{- else }}
++        prometheus.io/scrape: "false"
++        prometheus.io/port: null
++        {{- end }}
++        kiali.io/runtimes: go,kiali
++        {{- if .Values.deployment.pod_annotations }}
++        {{- toYaml .Values.deployment.pod_annotations | nindent 8 }}
++        {{- end }}
++    spec:
++      serviceAccountName: {{ include "kiali-server.fullname" . }}
++      {{- if .Values.deployment.priority_class_name }}
++      priorityClassName: {{ .Values.deployment.priority_class_name | quote }}
++      {{- end }}
++      {{- if .Values.deployment.image_pull_secrets }}
++      imagePullSecrets:
++      {{- range .Values.deployment.image_pull_secrets }}
++      - name: {{ . }}
++      {{- end }}
++      {{- end }}
++      containers:
++      - image: "{{ template "system_default_registry" . }}{{ .Values.deployment.repository }}:{{ .Values.deployment.tag }}"
++        imagePullPolicy: {{ .Values.deployment.image_pull_policy | default "Always" }}
++        name: {{ include "kiali-server.fullname" . }}
++        command:
++        - "/opt/kiali/kiali"
++        - "-config"
++        - "/kiali-configuration/config.yaml"
++        - "-v"
++        - "{{ .Values.deployment.verbose_mode }}"
++        ports:
++        - name: api-port
++          containerPort: {{ .Values.server.port | default 20001 }}
++        {{- if .Values.server.metrics_enabled }}
++        - name: http-metrics
++          containerPort: {{ .Values.server.metrics_port | default 9090 }}
++        {{- end }}
++        readinessProbe:
++          httpGet:
++            path: {{ include "kiali-server.server.web_root" . | trimSuffix "/"  }}/healthz
++            port: api-port
++            {{- if (include "kiali-server.identity.cert_file" .) }}
++            scheme: HTTPS
++            {{- else }}
++            scheme: HTTP
++            {{- end }}
++          initialDelaySeconds: 5
++          periodSeconds: 30
++        livenessProbe:
++          httpGet:
++            path: {{ include "kiali-server.server.web_root" . | trimSuffix "/"  }}/healthz
++            port: api-port
++            {{- if (include "kiali-server.identity.cert_file" .) }}
++            scheme: HTTPS
++            {{- else }}
++            scheme: HTTP
++            {{- end }}
++          initialDelaySeconds: 5
++          periodSeconds: 30
++        env:
++        - name: ACTIVE_NAMESPACE
++          valueFrom:
++            fieldRef:
++              fieldPath: metadata.namespace
++        volumeMounts:
++        {{- if .Values.web_root_override }}
++        - name: kiali-console
++          subPath: env.js
++          mountPath: /opt/kiali/console/env.js
++        {{- end }}
++        - name: {{ include "kiali-server.fullname" . }}-configuration
++          mountPath: "/kiali-configuration"
++        - name: {{ include "kiali-server.fullname" . }}-cert
++          mountPath: "/kiali-cert"
++        - name: {{ include "kiali-server.fullname" . }}-secret
++          mountPath: "/kiali-secret"
++        {{- if .Capabilities.APIVersions.Has "route.openshift.io/v1" }}
++        - name: {{ include "kiali-server.fullname" . }}-cabundle
++          mountPath: "/kiali-cabundle"
++        {{- end }}
++        {{- if .Values.deployment.resources }}
++        resources:
++        {{- toYaml .Values.deployment.resources | nindent 10 }}
++        {{- end }}
++      volumes:
++      {{- if .Values.web_root_override }}
++      - name: kiali-console
++        configMap:
++          name: kiali-console
++          items:
++          - key: env.js
++            path: env.js
++      {{- end }}
++      - name: {{ include "kiali-server.fullname" . }}-configuration
++        configMap:
++          name: {{ include "kiali-server.fullname" . }}
++      - name: {{ include "kiali-server.fullname" . }}-cert
++        secret:
++          {{- if .Capabilities.APIVersions.Has "route.openshift.io/v1" }}
++          secretName: {{ include "kiali-server.fullname" . }}-cert-secret
++          {{- else }}
++          secretName: istio.{{ include "kiali-server.fullname" . }}-service-account
++          {{- end }}
++          {{- if not (include "kiali-server.identity.cert_file" .) }}
++          optional: true
++          {{- end }}
++      - name: {{ include "kiali-server.fullname" . }}-secret
++        secret:
++          secretName: {{ .Values.deployment.secret_name }}
++          optional: true
++      {{- if .Capabilities.APIVersions.Has "route.openshift.io/v1" }}
++      - name: {{ include "kiali-server.fullname" . }}-cabundle
++        configMap:
++          name: {{ include "kiali-server.fullname" . }}-cabundle
++      {{- end }}
++      {{- if or (.Values.deployment.affinity.node) (or (.Values.deployment.pod) (.Values.deployment.pod_anti)) }}
++      affinity:
++        {{- if .Values.deployment.affinity.node }}
++        nodeAffinity:
++        {{- toYaml .Values.deployment.affinity.node | nindent 10 }}
++        {{- end }}
++        {{- if .Values.deployment.affinity.pod }}
++        podAffinity:
++        {{- toYaml .Values.deployment.affinity.pod | nindent 10 }}
++        {{- end }}
++        {{- if .Values.deployment.affinity.pod_anti }}
++        podAntiAffinity:
++        {{- toYaml .Values.deployment.affinity.pod_anti | nindent 10 }}
++        {{- end }}
++      {{- end }}
++      {{- if .Values.deployment.tolerations }}
++      tolerations:
++      {{- toYaml .Values.deployment.tolerations | nindent 8 }}
++      {{- end }}
++      {{- if .Values.deployment.node_selector }}
++      nodeSelector:
++      {{- toYaml .Values.deployment.node_selector | nindent 8 }}
++      {{- end }}
++...
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/ingess.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/ingess.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/ingess.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/ingess.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,40 @@
++{{- if not (.Capabilities.APIVersions.Has "route.openshift.io/v1") }}
++{{- if .Values.deployment.ingress_enabled }}
++---
++apiVersion: extensions/v1beta1
++kind: Ingress
++metadata:
++  name: {{ include "kiali-server.fullname" . }}
++  namespace: {{ .Release.Namespace }}
++  labels:
++    {{- include "kiali-server.labels" . | nindent 4 }}
++  annotations:
++    {{- if hasKey .Values.deployment.override_ingress_yaml.metadata "annotations" }}
++    {{- toYaml .Values.deployment.override_ingress_yaml.metadata.annotations | nindent 4 }}
++    {{- else }}
++    # For ingress-nginx versions older than 0.20.0 use secure-backends.
++    # (see: https://github.com/kubernetes/ingress-nginx/issues/3416#issuecomment-438247948)
++    # For ingress-nginx versions 0.20.0 and later use backend-protocol.
++    {{- if (include "kiali-server.identity.cert_file" .) }}
++    nginx.ingress.kubernetes.io/secure-backends: "true"
++    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
++    {{- else }}
++    nginx.ingress.kubernetes.io/secure-backends: "false"
++    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
++    {{- end }}
++    {{- end }}
++spec:
++  {{- if hasKey .Values.deployment.override_ingress_yaml "spec" }}
++  {{- toYaml .Values.deployment.override_ingress_yaml.spec | nindent 2 }}
++  {{- else }}
++  rules:
++  - http:
++      paths:
++      - path: {{ include "kiali-server.server.web_root" . }}
++        backend:
++          serviceName: {{ include "kiali-server.fullname" . }}
++          servicePort: {{ .Values.server.port }}
++  {{- end }}
++...
++{{- end }}
++{{- end }}
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/oauth.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/oauth.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/oauth.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/oauth.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,17 @@
++{{- if .Capabilities.APIVersions.Has "route.openshift.io/v1" }}
++{{- if .Values.kiali_route_url }}
++---
++apiVersion: oauth.openshift.io/v1
++kind: OAuthClient
++metadata:
++  name: {{ include "kiali-server.fullname" . }}-{{ .Release.Namespace }}
++  namespace: {{ .Release.Namespace }}
++  labels:
++    {{- include "kiali-server.labels" . | nindent 4 }}
++redirectURIs:
++- {{ .Values.kiali_route_url }}
++grantMethod: auto
++allowAnyScope: true
++...
++{{- end }}
++{{- end }}
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/role-viewer.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/role-viewer.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/role-viewer.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/role-viewer.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,101 @@
++---
++apiVersion: rbac.authorization.k8s.io/v1
++kind: ClusterRole
++metadata:
++  name: {{ include "kiali-server.fullname" . }}-viewer
++  labels:
++    {{- include "kiali-server.labels" . | nindent 4 }}
++rules:
++- apiGroups: [""]
++  resources:
++  - configmaps
++  - endpoints
++  - namespaces
++  - nodes
++  - pods
++  - pods/log
++  - replicationcontrollers
++  - services
++  verbs:
++  - get
++  - list
++  - watch
++- apiGroups: ["extensions", "apps"]
++  resources:
++  - deployments
++  - replicasets
++  - statefulsets
++  verbs:
++  - get
++  - list
++  - watch
++- apiGroups: ["autoscaling"]
++  resources:
++  - horizontalpodautoscalers
++  verbs:
++  - get
++  - list
++  - watch
++- apiGroups: ["batch"]
++  resources:
++  - cronjobs
++  - jobs
++  verbs:
++  - get
++  - list
++  - watch
++- apiGroups:
++  - config.istio.io
++  - networking.istio.io
++  - authentication.istio.io
++  - rbac.istio.io
++  - security.istio.io
++  resources: ["*"]
++  verbs:
++  - get
++  - list
++  - watch
++- apiGroups: ["authentication.maistra.io"]
++  resources:
++  - servicemeshpolicies
++  verbs:
++  - get
++  - list
++  - watch
++- apiGroups: ["rbac.maistra.io"]
++  resources:
++  - servicemeshrbacconfigs
++  verbs:
++  - get
++  - list
++  - watch
++- apiGroups: ["apps.openshift.io"]
++  resources:
++  - deploymentconfigs
++  verbs:
++  - get
++  - list
++  - watch
++- apiGroups: ["project.openshift.io"]
++  resources:
++  - projects
++  verbs:
++  - get
++- apiGroups: ["route.openshift.io"]
++  resources:
++  - routes
++  verbs:
++  - get
++- apiGroups: ["monitoring.kiali.io"]
++  resources:
++  - monitoringdashboards
++  verbs:
++  - get
++  - list
++- apiGroups: ["iter8.tools"]
++  resources:
++  - experiments
++  verbs:
++  - get
++  - list
++...
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/role.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/role.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/role.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/role.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,118 @@
++---
++apiVersion: rbac.authorization.k8s.io/v1
++kind: ClusterRole
++metadata:
++  name: {{ include "kiali-server.fullname" . }}
++  labels:
++    {{- include "kiali-server.labels" . | nindent 4 }}
++rules:
++- apiGroups: [""]
++  resources:
++  - configmaps
++  - endpoints
++  - namespaces
++  - nodes
++  - pods
++  - pods/log
++  - replicationcontrollers
++  - services
++  verbs:
++  - get
++  - list
++  - patch
++  - watch
++- apiGroups: ["extensions", "apps"]
++  resources:
++  - deployments
++  - replicasets
++  - statefulsets
++  verbs:
++  - get
++  - list
++  - patch
++  - watch
++- apiGroups: ["autoscaling"]
++  resources:
++  - horizontalpodautoscalers
++  verbs:
++  - get
++  - list
++  - watch
++- apiGroups: ["batch"]
++  resources:
++  - cronjobs
++  - jobs
++  verbs:
++  - get
++  - list
++  - patch
++  - watch
++- apiGroups:
++  - config.istio.io
++  - networking.istio.io
++  - authentication.istio.io
++  - rbac.istio.io
++  - security.istio.io
++  resources: ["*"]
++  verbs:
++  - create
++  - delete
++  - get
++  - list
++  - patch
++  - watch
++- apiGroups: ["authentication.maistra.io"]
++  resources:
++  - servicemeshpolicies
++  verbs:
++  - create
++  - delete
++  - get
++  - list
++  - patch
++  - watch
++- apiGroups: ["rbac.maistra.io"]
++  resources:
++  - servicemeshrbacconfigs
++  verbs:
++  - create
++  - delete
++  - get
++  - list
++  - patch
++  - watch
++- apiGroups: ["apps.openshift.io"]
++  resources:
++  - deploymentconfigs
++  verbs:
++  - get
++  - list
++  - patch
++  - watch
++- apiGroups: ["project.openshift.io"]
++  resources:
++  - projects
++  verbs:
++  - get
++- apiGroups: ["route.openshift.io"]
++  resources:
++  - routes
++  verbs:
++  - get
++- apiGroups: ["monitoring.kiali.io"]
++  resources:
++  - monitoringdashboards
++  verbs:
++  - get
++  - list
++- apiGroups: ["iter8.tools"]
++  resources:
++  - experiments
++  verbs:
++  - create
++  - delete
++  - get
++  - list
++  - patch
++  - watch
++...
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/rolebinding.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/rolebinding.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/rolebinding.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/rolebinding.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,20 @@
++---
++apiVersion: rbac.authorization.k8s.io/v1
++kind: ClusterRoleBinding
++metadata:
++  name: {{ include "kiali-server.fullname" . }}
++  labels:
++    {{- include "kiali-server.labels" . | nindent 4 }}
++roleRef:
++  apiGroup: rbac.authorization.k8s.io
++  kind: ClusterRole
++  {{- if .Values.deployment.view_only_mode }}
++  name: {{ include "kiali-server.fullname" . }}-viewer
++  {{- else }}
++  name: {{ include "kiali-server.fullname" . }}
++  {{- end }}
++subjects:
++- kind: ServiceAccount
++  name: {{ include "kiali-server.fullname" . }}
++  namespace: {{ .Release.Namespace }}
++...
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/route.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/route.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/route.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/route.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,30 @@
++{{- if .Capabilities.APIVersions.Has "route.openshift.io/v1" }}
++{{- if .Values.deployment.ingress_enabled }}
++# As of OpenShift 4.5, need to use --disable-openapi-validation when installing via Helm
++---
++apiVersion: route.openshift.io/v1
++kind: Route
++metadata:
++  name: {{ include "kiali-server.fullname" . }}
++  namespace: {{ .Release.Namespace }}
++  labels:
++    {{- include "kiali-server.labels" . | nindent 4 }}
++    {{- if hasKey .Values.deployment.override_ingress_yaml.metadata "annotations" }}}
++    annotations:
++    {{- toYaml .Values.deployment.override_ingress_yaml.metadata.annotations | nindent 4 }}
++    {{- end }}
++spec:
++  {{- if hasKey .Values.deployment.override_ingress_yaml "spec" }}
++  {{- toYaml .Values.deployment.override_ingress_yaml.spec | nindent 2 }}
++  {{- else }}
++  tls:
++    termination: reencrypt
++    insecureEdgeTerminationPolicy: Redirect
++  to:
++    kind: Service
++    targetPort: {{ .Values.server.port }}
++    name: {{ include "kiali-server.fullname" . }}
++  {{- end }}
++...
++{{- end }}
++{{- end }}
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/service.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/service.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/service.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/service.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,40 @@
++---
++apiVersion: v1
++kind: Service
++metadata:
++  name: {{ include "kiali-server.fullname" . }}
++  namespace: {{ .Release.Namespace }}
++  labels:
++    {{- include "kiali-server.labels" . | nindent 4 }}
++  annotations:
++    {{- if .Capabilities.APIVersions.Has "route.openshift.io/v1" }}
++    service.beta.openshift.io/serving-cert-secret-name: {{ include "kiali-server.fullname" . }}-cert-secret
++    {{- end }}
++    kiali.io/api-spec: https://kiali.io/api
++    kiali.io/api-type: rest
++    {{- if .Values.deployment.service_annotations }}
++    {{- toYaml .Values.deployment.service_annotations | nindent 4  }}
++    {{- end }}
++spec:
++  {{- if .Values.deployment.service_type }}
++  type: {{ .Values.deployment.service_type }}
++  {{- end }}
++  ports:
++  {{- if (include "kiali-server.identity.cert_file" .) }}
++  - name: tcp
++  {{- else }}
++  - name: http
++  {{- end }}
++    protocol: TCP
++    port: {{ .Values.server.port }}
++  {{- if .Values.server.metrics_enabled }}
++  - name: http-metrics
++    protocol: TCP
++    port: {{ .Values.server.metrics_port }}
++  {{- end }}
++  selector:
++    {{- include "kiali-server.selectorLabels" . | nindent 4 }}
++  {{- if .Values.deployment.additional_service_yaml }}
++  {{- toYaml .Values.deployment.additional_service_yaml | nindent 2  }}
++  {{- end }}
++...
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/serviceaccount.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/serviceaccount.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/serviceaccount.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/serviceaccount.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,9 @@
++---
++apiVersion: v1
++kind: ServiceAccount
++metadata:
++  name: {{ include "kiali-server.fullname" . }}
++  namespace: {{ .Release.Namespace }}
++  labels:
++    {{- include "kiali-server.labels" . | nindent 4 }}
++...
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/validate-install-crd.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/validate-install-crd.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/validate-install-crd.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/validate-install-crd.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,14 @@
++#{{- if gt (len (lookup "rbac.authorization.k8s.io/v1" "ClusterRole" "" "")) 0 -}}
++# {{- $found := dict -}}
++# {{- set $found "monitoring.kiali.io/v1alpha1/MonitoringDashboard" false -}}
++# {{- range .Capabilities.APIVersions -}}
++# {{- if hasKey $found (toString .) -}}
++# 	{{- set $found (toString .) true -}}
++# {{- end -}}
++# {{- end -}}
++# {{- range $_, $exists := $found -}}
++# {{- if (eq $exists false) -}}
++# 	{{- required "Required CRDs are missing. Please install the rancher-kiali-server-crd chart before installing this chart." "" -}}
++# {{- end -}}
++# {{- end -}}
++#{{- end -}}
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/web-root-configmap.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/web-root-configmap.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/templates/web-root-configmap.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/templates/web-root-configmap.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,12 @@
++{{- if .Values.web_root_override }}
++apiVersion: v1
++kind: ConfigMap
++metadata:
++  name: kiali-console
++  namespace: {{ .Release.Namespace }}
++  labels:
++    {{- include "kiali-server.labels" . | nindent 4 }}
++data:
++  env.js: |
++    window.WEB_ROOT='/k8s/clusters/{{ .Values.global.cattle.clusterId }}/api/v1/namespaces/{{ .Release.Namespace }}/services/http:kiali:20001/proxy/kiali';
++{{- end }}
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/values.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/values.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-kiali-server/values.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-kiali-server/values.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,79 @@
++nameOverride: "kiali"
++fullnameOverride: "kiali"
++
++# This is required for "openshift" auth strategy.
++# You have to know ahead of time what your Route URL will be because
++# right now the helm chart can't figure this out at runtime (it would
++# need to wait for the Kiali Route to be deployed and for OpenShift
++# to start it up). If someone knows how to update this helm chart to
++# do this, a PR would be welcome.
++kiali_route_url: ""
++
++# rancher specific override that allows proxy access to kiali url
++web_root_override: true
++
++#
++# Settings that mimic the Kiali CR which are placed in the ConfigMap.
++# Note that only those values used by the Helm Chart will be here.
++#
++
++istio_namespace: "" # default is where Kiali is installed
++
++auth:
++  openid: {}
++  openshift: {}
++  strategy: ""
++
++deployment:
++  # This only limits what Kiali will attempt to see, but Kiali Service Account has permissions to see everything.
++  # For more control over what the Kial Service Account can see, use the Kiali Operator
++  accessible_namespaces:
++  - "**"
++  additional_service_yaml: {}
++  affinity:
++    node: {}
++    pod: {}
++    pod_anti: {}
++  custom_dashboards:
++    excludes: ['']
++    includes: ['*']
++  repository: rancher/kiali-kiali
++  image_pull_policy: "Always"
++  image_pull_secrets: []
++  tag: v1.24.0
++  ingress_enabled: true
++  node_selector: {}
++  override_ingress_yaml:
++    metadata: {}
++  pod_annotations: {}
++  priority_class_name: ""
++  replicas: 1
++  resources: {}
++  secret_name: "kiali"
++  service_annotations: {}
++  service_type: ""
++  tolerations: []
++  verbose_mode: "3"
++  version_label: v1.24.0
++  view_only_mode: false
++
++identity: {}
++  #cert_file:
++  #private_key_file:
++
++login_token:
++  signing_key: ""
++
++server:
++  port: 20001
++  metrics_enabled: true
++  metrics_port: 9090
++  web_root: ""
++
++# Common settings used among istio subcharts.
++global:
++  # Specify rancher clusterId of external tracing config
++  # https://github.com/istio/istio.io/issues/4146#issuecomment-493543032
++  cattle:
++    systemDefaultRegistry: ""
++    clusterId:
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-tracing/.helmignore dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-tracing/.helmignore
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-tracing/.helmignore	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-tracing/.helmignore	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,23 @@
++# Patterns to ignore when building packages.
++# This supports shell glob matching, relative path matching, and
++# negation (prefixed with !). Only one pattern per line.
++.DS_Store
++# Common VCS dirs
++.git/
++.gitignore
++.bzr/
++.bzrignore
++.hg/
++.hgignore
++.svn/
++# Common backup files
++*.swp
++*.bak
++*.tmp
++*.orig
++*~
++# Various IDEs
++.project
++.idea/
++*.tmproj
++.vscode/
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-tracing/Chart.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-tracing/Chart.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-tracing/Chart.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-tracing/Chart.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,12 @@
++annotations:
++  catalog.cattle.io/hidden: "true"
++  catalog.cattle.io/os: linux
++  catalog.rancher.io/certified: rancher
++  catalog.rancher.io/namespace: istio-system
++  catalog.rancher.io/release-name: rancher-tracing
++apiVersion: v1
++appVersion: 1.20.0
++description: A quick start Jaeger Tracing installation using the all-in-one demo.
++  This is not production qualified. Refer to https://www.jaegertracing.io/ for details.
++name: rancher-tracing
++version: 1.20.001
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-tracing/README.md dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-tracing/README.md
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-tracing/README.md	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-tracing/README.md	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,5 @@
++# Jaeger
++
++A Rancher chart based on the Jaeger all-in-one quick installation option. This chart will allow you to trace and monitor distributed microservices.
++
++> **Note:** The basic all-in-one Jaeger installation which is not qualified for production. Use the [Jaeger Tracing](https://www.jaegertracing.io) documentation to determine which installation you will need for your production needs.
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-tracing/templates/_affinity.tpl dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-tracing/templates/_affinity.tpl
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-tracing/templates/_affinity.tpl	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-tracing/templates/_affinity.tpl	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,92 @@
++{{/* affinity - https://kubernetes.io/docs/concepts/configuration/assign-pod-node/ */}}
++{{- define "nodeAffinity" }}
++  nodeAffinity:
++    requiredDuringSchedulingIgnoredDuringExecution:
++    {{- include "nodeAffinityRequiredDuringScheduling" . }}
++    preferredDuringSchedulingIgnoredDuringExecution:
++    {{- include "nodeAffinityPreferredDuringScheduling" . }}
++{{- end }}
++
++{{- define "nodeAffinityRequiredDuringScheduling" }}
++      nodeSelectorTerms:
++      - matchExpressions:
++        - key: beta.kubernetes.io/arch
++          operator: In
++          values:
++        {{- range $key, $val := .Values.global.arch }}
++          {{- if gt ($val | int) 0 }}
++          - {{ $key | quote }}
++          {{- end }}
++        {{- end }}
++        {{- $nodeSelector := default .Values.global.defaultNodeSelector .Values.nodeSelector -}}
++        {{- range $key, $val := $nodeSelector }}
++        - key: {{ $key }}
++          operator: In
++          values:
++          - {{ $val | quote }}
++        {{- end }}
++{{- end }}
++
++{{- define "nodeAffinityPreferredDuringScheduling" }}
++  {{- range $key, $val := .Values.global.arch }}
++    {{- if gt ($val | int) 0 }}
++    - weight: {{ $val | int }}
++      preference:
++        matchExpressions:
++        - key: beta.kubernetes.io/arch
++          operator: In
++          values:
++          - {{ $key | quote }}
++    {{- end }}
++  {{- end }}
++{{- end }}
++
++{{- define "podAntiAffinity" }}
++{{- if or .Values.podAntiAffinityLabelSelector .Values.podAntiAffinityTermLabelSelector}}
++  podAntiAffinity:
++    {{- if .Values.podAntiAffinityLabelSelector }}
++    requiredDuringSchedulingIgnoredDuringExecution:
++    {{- include "podAntiAffinityRequiredDuringScheduling" . }}
++    {{- end }}
++    {{- if or .Values.podAntiAffinityTermLabelSelector}}
++    preferredDuringSchedulingIgnoredDuringExecution:
++    {{- include "podAntiAffinityPreferredDuringScheduling" . }}
++    {{- end }}
++{{- end }}
++{{- end }}
++
++{{- define "podAntiAffinityRequiredDuringScheduling" }}
++    {{- range $index, $item := .Values.podAntiAffinityLabelSelector }}
++    - labelSelector:
++        matchExpressions:
++        - key: {{ $item.key }}
++          operator: {{ $item.operator }}
++          {{- if $item.values }}
++          values:
++          {{- $vals := split "," $item.values }}
++          {{- range $i, $v := $vals }}
++          - {{ $v | quote }}
++          {{- end }}
++          {{- end }}
++      topologyKey: {{ $item.topologyKey }}
++    {{- end }}
++{{- end }}
++
++{{- define "podAntiAffinityPreferredDuringScheduling" }}
++    {{- range $index, $item := .Values.podAntiAffinityTermLabelSelector }}
++    - podAffinityTerm:
++        labelSelector:
++          matchExpressions:
++          - key: {{ $item.key }}
++            operator: {{ $item.operator }}
++            {{- if $item.values }}
++            values:
++            {{- $vals := split "," $item.values }}
++            {{- range $i, $v := $vals }}
++            - {{ $v | quote }}
++            {{- end }}
++            {{- end }}
++        topologyKey: {{ $item.topologyKey }}
++      weight: 100
++    {{- end }}
++{{- end }}
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-tracing/templates/_helpers.tpl dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-tracing/templates/_helpers.tpl
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-tracing/templates/_helpers.tpl	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-tracing/templates/_helpers.tpl	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,32 @@
++{{- define "system_default_registry" -}}
++{{- if .Values.global.cattle.systemDefaultRegistry -}}
++{{- printf "%s/" .Values.global.cattle.systemDefaultRegistry -}}
++{{- else -}}
++{{- "" -}}
++{{- end -}}
++{{- end -}}
++
++{{/*
++Expand the name of the chart.
++*/}}
++{{- define "tracing.name" -}}
++{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
++{{- end -}}
++
++{{/*
++Create a default fully qualified app name.
++We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
++If release name contains chart name it will be used as a full name.
++*/}}
++{{- define "tracing.fullname" -}}
++{{- if .Values.fullnameOverride -}}
++{{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
++{{- else -}}
++{{- $name := default .Chart.Name .Values.nameOverride -}}
++{{- if contains $name .Release.Name -}}
++{{- .Release.Name | trunc 63 | trimSuffix "-" -}}
++{{- else -}}
++{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
++{{- end -}}
++{{- end -}}
++{{- end -}}
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-tracing/templates/deployment.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-tracing/templates/deployment.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-tracing/templates/deployment.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-tracing/templates/deployment.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,80 @@
++apiVersion: apps/v1
++kind: Deployment
++metadata:
++  name: {{ include "tracing.fullname" . }}
++  namespace: {{ .Release.Namespace }}
++  labels:
++    app: {{ .Values.provider }}
++    heritage: {{ .Release.Service }}
++    release: {{ .Release.Name }}
++spec:
++  selector:
++    matchLabels:
++      app: {{ .Values.provider }}
++  template:
++    metadata:
++      labels:
++        app: {{ .Values.provider }}
++        heritage: {{ .Release.Service }}
++        release: {{ .Release.Name }}
++      annotations:
++        sidecar.istio.io/inject: "false"
++        prometheus.io/scrape: "true"
++        prometheus.io/port: "14269"
++{{- if .Values.jaeger.podAnnotations }}
++{{ toYaml .Values.jaeger.podAnnotations | indent 8 }}
++{{- end }}
++    spec:
++      containers:
++        - name: jaeger
++          image: "{{ template "system_default_registry" . }}{{ .Values.jaeger.repository }}:{{ .Values.jaeger.tag }}"
++          imagePullPolicy: {{ .Values.global.imagePullPolicy }}
++          env:
++          {{- if eq .Values.jaeger.spanStorageType "badger" }}
++          - name: BADGER_EPHEMERAL
++            value: "false"
++          - name: SPAN_STORAGE_TYPE
++            value: "badger"
++          - name: BADGER_DIRECTORY_VALUE
++            value: "/badger/data"
++          - name: BADGER_DIRECTORY_KEY
++            value: "/badger/key"
++          {{- end }}
++          - name: COLLECTOR_ZIPKIN_HTTP_PORT
++            value: "9411"
++          - name: MEMORY_MAX_TRACES
++            value: "{{ .Values.jaeger.memory.max_traces }}"
++          - name: QUERY_BASE_PATH
++            value: {{ if .Values.contextPath }} {{ .Values.contextPath }} {{ else }} /{{ .Values.provider }} {{ end }}
++          livenessProbe:
++            httpGet:
++              path: /
++              port: 14269
++          readinessProbe:
++            httpGet:
++              path: /
++              port: 14269
++{{- if eq .Values.jaeger.spanStorageType "badger" }}
++          volumeMounts:
++            - name: data
++              mountPath: /badger
++{{- end }}
++          resources:
++{{- if .Values.jaeger.resources }}
++{{ toYaml .Values.jaeger.resources | indent 12 }}
++{{- else }}
++{{ toYaml .Values.global.defaultResources | indent 12 }}
++{{- end }}
++      affinity:
++      {{- include "nodeAffinity" . | indent 6 }}
++      {{- include "podAntiAffinity" . | indent 6 }}
++{{- if eq .Values.jaeger.spanStorageType "badger" }}
++      volumes:
++      - name: data
++{{- if .Values.jaeger.persistentVolumeClaim.enabled }}
++        persistentVolumeClaim:
++          claimName: istio-jaeger-pvc
++{{- else }}
++        emptyDir: {}
++{{- end }}
++{{- end }}
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-tracing/templates/pvc.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-tracing/templates/pvc.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-tracing/templates/pvc.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-tracing/templates/pvc.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,16 @@
++{{- if .Values.jaeger.persistentVolumeClaim.enabled }}
++kind: PersistentVolumeClaim
++apiVersion: v1
++metadata:
++  name: istio-jaeger-pvc
++  namespace: {{ .Release.Namespace }}
++  labels:
++    app: {{ .Values.provider }}
++spec:
++  storageClassName: {{ .Values.jaeger.storageClassName }}
++  accessModes:
++    - {{ .Values.jaeger.accessMode }}
++  resources:
++    requests:
++      storage: {{.Values.jaeger.persistentVolumeClaim.storage }}
++{{- end }}
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-tracing/templates/service.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-tracing/templates/service.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-tracing/templates/service.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-tracing/templates/service.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,63 @@
++apiVersion: v1
++kind: Service
++metadata:
++  name: tracing
++  namespace: {{ .Release.Namespace }}
++  annotations:
++    {{- range $key, $val := .Values.service.annotations }}
++    {{ $key }}: {{ $val | quote }}
++    {{- end }}
++  labels:
++    app: {{ .Values.provider }}
++    heritage: {{ .Release.Service }}
++    release: {{ .Release.Name }}
++spec:
++  type: {{ .Values.service.type }}
++  ports:
++    - name: {{ .Values.service.name }}
++      port: {{ .Values.service.externalPort }}
++      protocol: TCP
++      targetPort: 16686
++  selector:
++    app: {{ .Values.provider }}
++---
++# Jaeger implements the Zipkin API. To support swapping out the tracing backend, we use a Service named Zipkin.
++apiVersion: v1
++kind: Service
++metadata:
++  name: zipkin
++  namespace: {{ .Release.Namespace }}
++  labels:
++    name: zipkin
++    heritage: {{ .Release.Service }}
++    release: {{ .Release.Name }}
++spec:
++  ports:
++    - name: {{ .Values.service.name }}
++      port: {{ .Values.zipkin.queryPort }}
++      targetPort: {{ .Values.zipkin.queryPort }}
++  selector:
++    app: {{ .Values.provider }}
++---
++apiVersion: v1
++kind: Service
++metadata:
++  name: jaeger-collector
++  namespace: {{ .Release.Namespace }}
++  labels:
++    app: {{ .Values.provider }}
++    heritage: {{ .Release.Service }}
++    release: {{ .Release.Name }}
++spec:
++  type: ClusterIP
++  ports:
++  - name: jaeger-collector-http
++    port: 14268
++    targetPort: 14268
++    protocol: TCP
++  - name: jaeger-collector-grpc
++    port: 14250
++    targetPort: 14250
++    protocol: TCP
++  selector:
++    app: {{ .Values.provider }}
+diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-istio/charts/rancher-tracing/values.yaml dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-tracing/values.yaml
+--- dev-v2.5-source/charts/rancher-istio/charts/rancher-tracing/values.yaml	1969-12-31 16:00:00.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-istio/charts/rancher-tracing/values.yaml	2021-01-15 14:10:36.000000000 -0800
+@@ -0,0 +1,42 @@
++provider: jaeger
++contextPath: ""
++nodeSelector: {}
++podAntiAffinityLabelSelector: []
++podAntiAffinityTermLabelSelector: []
++nameOverride: ""
++fullnameOverride: ""
++
++global:
++  cattle:
++    systemDefaultRegistry: ""
++  defaultResources: {}
++  imagePullPolicy: IfNotPresent
++  imagePullSecrets: []
++  arch:
++    amd64: 2
++    s390x: 2
++    ppc64le: 2
++  defaultNodeSelector: {}
++
++jaeger:
++  repository: rancher/jaegertracing-all-in-one
++  tag: 1.20.0
++  # spanStorageType value can be "memory" and "badger" for all-in-one image
++  spanStorageType: badger
++  resources:
++    requests:
++      cpu: 10m
++  persistentVolumeClaim: 
++    enabled: false
++    storage: 5Gi
++  storageClassName: ""
++  accessMode: ReadWriteMany
++  memory:
++    max_traces: 50000
++zipkin:
++  queryPort: 9411
++service:
++  annotations: {}
++  name: http-query
++  type: ClusterIP
++  externalPort: 16686
