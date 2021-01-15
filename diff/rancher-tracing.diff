@@ -1,6 +1,6 @@
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-tracing/Chart.yaml dev-v2.5-source-alt/charts/rancher-tracing/Chart.yaml
 --- dev-v2.5-source/charts/rancher-tracing/Chart.yaml	2021-01-15 14:07:36.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-tracing/Chart.yaml	2021-01-15 14:10:36.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-tracing/Chart.yaml	2021-01-15 14:24:17.000000000 -0800
 @@ -1,11 +1,12 @@
 -apiVersion: v1
 -appVersion: 1.20.0

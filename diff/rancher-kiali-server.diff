@@ -1,6 +1,6 @@
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-kiali-server/Chart.yaml dev-v2.5-source-alt/charts/rancher-kiali-server/Chart.yaml
 --- dev-v2.5-source/charts/rancher-kiali-server/Chart.yaml	2021-01-15 14:07:36.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-kiali-server/Chart.yaml	2021-01-15 14:10:36.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-kiali-server/Chart.yaml	2021-01-15 14:24:17.000000000 -0800
 @@ -1,29 +1,31 @@
 +annotations:
 +  catalog.cattle.io/auto-install: rancher-kiali-server-crd=match
@@ -56,7 +56,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-kiali-server/Cha
 +version: 1.24.003-rc00
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-kiali-server/charts-crd/Chart.yaml dev-v2.5-source-alt/charts/rancher-kiali-server/charts-crd/Chart.yaml
 --- dev-v2.5-source/charts/rancher-kiali-server/charts-crd/Chart.yaml	2021-01-15 14:07:36.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-kiali-server/charts-crd/Chart.yaml	2021-01-15 14:10:36.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-kiali-server/charts-crd/Chart.yaml	2021-01-15 14:24:17.000000000 -0800
 @@ -1,7 +1,7 @@
 +annotations:
 +  catalog.cattle.io/hidden: "true"
@@ -70,7 +70,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-kiali-server/cha
 +version: 1.24.003-rc00
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-kiali-server/templates/validate-install-crd.yaml dev-v2.5-source-alt/charts/rancher-kiali-server/templates/validate-install-crd.yaml
 --- dev-v2.5-source/charts/rancher-kiali-server/templates/validate-install-crd.yaml	2021-01-15 14:07:36.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-kiali-server/templates/validate-install-crd.yaml	2021-01-15 14:10:36.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-kiali-server/templates/validate-install-crd.yaml	2021-01-15 14:24:17.000000000 -0800
 @@ -8,7 +8,7 @@
  # {{- end -}}
  # {{- range $_, $exists := $found -}}

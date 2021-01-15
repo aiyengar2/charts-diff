@@ -1,6 +1,6 @@
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-backup/Chart.yaml dev-v2.5-source-alt/charts/rancher-backup/Chart.yaml
 --- dev-v2.5-source/charts/rancher-backup/Chart.yaml	2021-01-15 14:07:36.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-backup/Chart.yaml	2021-01-15 14:10:36.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-backup/Chart.yaml	2021-01-15 14:24:16.000000000 -0800
 @@ -1,19 +1,20 @@
 -apiVersion: v1
 -appVersion: v1.0.3
@@ -38,7 +38,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-backup/Chart.yam
 +version: 1.0.30000-rc00
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-backup/charts-crd/Chart.yaml dev-v2.5-source-alt/charts/rancher-backup/charts-crd/Chart.yaml
 --- dev-v2.5-source/charts/rancher-backup/charts-crd/Chart.yaml	2021-01-15 14:07:36.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-backup/charts-crd/Chart.yaml	2021-01-15 14:10:36.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-backup/charts-crd/Chart.yaml	2021-01-15 14:24:16.000000000 -0800
 @@ -1,10 +1,10 @@
 +annotations:
 +  catalog.cattle.io/certified: rancher
@@ -58,7 +58,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-backup/charts-cr
 +version: 1.0.300-rc00
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-backup/templates/validate-install-crd.yaml dev-v2.5-source-alt/charts/rancher-backup/templates/validate-install-crd.yaml
 --- dev-v2.5-source/charts/rancher-backup/templates/validate-install-crd.yaml	2021-01-15 14:07:36.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-backup/templates/validate-install-crd.yaml	2021-01-15 14:10:36.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-backup/templates/validate-install-crd.yaml	2021-01-15 14:24:16.000000000 -0800
 @@ -10,7 +10,7 @@
  # {{- end -}}
  # {{- range $_, $exists := $found -}}

@@ -15,3 +15,8 @@ done
 
 rm -rf dev-v2.5-source-alt/charts
 mv dev-v2.5-source-alt/new-charts dev-v2.5-source-alt/charts
+
+for f in $(find dev-v2.5-source -type f -name "*.tgz"); do
+    tar -xvzf ${f} -C $(dirname ${f})
+    rm ${f}
+done
