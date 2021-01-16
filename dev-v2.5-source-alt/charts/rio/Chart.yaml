@@ -12,4 +12,4 @@ description: The application deployment engine for Kubernetes
 home: https://rio.io
 icon: https://charts.rancher.io/assets/logos/rio.svg
 name: rio
-version: 0.8.000-rc00
+version: 0.8.001-rc00

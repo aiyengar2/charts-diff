@@ -9,4 +9,4 @@ appVersion: 0.3.3
 description: Fleet Manager CustomResourceDefinitions
 icon: https://charts.rancher.io/assets/logos/fleet.svg
 name: fleet-crd
-version: 0.3.300-rc00
+version: 0.3.301-rc00

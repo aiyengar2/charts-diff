@@ -12,4 +12,4 @@ appVersion: 0.3.3
 description: Fleet Manager - GitOps at Scale
 icon: https://charts.rancher.io/assets/logos/fleet.svg
 name: fleet
-version: 0.3.300-rc00
+version: 0.3.301-rc00

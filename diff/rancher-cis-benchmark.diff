@@ -1,6 +1,6 @@
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-cis-benchmark/Chart.yaml dev-v2.5-source-alt/charts/rancher-cis-benchmark/Chart.yaml
---- dev-v2.5-source/charts/rancher-cis-benchmark/Chart.yaml	2021-01-15 14:07:36.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-cis-benchmark/Chart.yaml	2021-01-15 14:24:16.000000000 -0800
+--- dev-v2.5-source/charts/rancher-cis-benchmark/Chart.yaml	2021-01-15 18:33:06.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-cis-benchmark/Chart.yaml	2021-01-15 18:33:17.000000000 -0800
 @@ -1,17 +1,18 @@
 -apiVersion: v1
 -appVersion: v1.0.3
@@ -31,10 +31,10 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-cis-benchmark/Ch
 +keywords:
 +- security
 +name: rancher-cis-benchmark
-+version: 1.0.300-rc00
++version: 1.0.301-rc00
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-cis-benchmark/charts-crd/Chart.yaml dev-v2.5-source-alt/charts/rancher-cis-benchmark/charts-crd/Chart.yaml
---- dev-v2.5-source/charts/rancher-cis-benchmark/charts-crd/Chart.yaml	2021-01-15 14:07:36.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-cis-benchmark/charts-crd/Chart.yaml	2021-01-15 14:24:17.000000000 -0800
+--- dev-v2.5-source/charts/rancher-cis-benchmark/charts-crd/Chart.yaml	2021-01-15 18:33:06.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-cis-benchmark/charts-crd/Chart.yaml	2021-01-15 18:33:17.000000000 -0800
 @@ -1,10 +1,10 @@
 +annotations:
 +  catalog.cattle.io/certified: rancher
@@ -51,10 +51,10 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-cis-benchmark/ch
 -  catalog.cattle.io/release-name: rancher-cis-benchmark-crd
 -  catalog.cattle.io/certified: rancher
 -  catalog.cattle.io/namespace: cis-operator-system
-+version: 1.0.30000-rc00
++version: 1.0.30001-rc00
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-cis-benchmark/templates/validate-install-crd.yaml dev-v2.5-source-alt/charts/rancher-cis-benchmark/templates/validate-install-crd.yaml
---- dev-v2.5-source/charts/rancher-cis-benchmark/templates/validate-install-crd.yaml	2021-01-15 14:07:36.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-cis-benchmark/templates/validate-install-crd.yaml	2021-01-15 14:24:17.000000000 -0800
+--- dev-v2.5-source/charts/rancher-cis-benchmark/templates/validate-install-crd.yaml	2021-01-15 18:33:06.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-cis-benchmark/templates/validate-install-crd.yaml	2021-01-15 18:33:17.000000000 -0800
 @@ -11,7 +11,7 @@
  # {{- end -}}
  # {{- range $_, $exists := $found -}}

@@ -2,6 +2,7 @@
 set -e
 
 cd $(dirname $0)
+cd ..
 
 for f in dev-v2.5-source-alt/charts/*/*/*; do
     chart_name=$(echo ${f} | cut -d'/' -f4)

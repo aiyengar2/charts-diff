@@ -34,4 +34,4 @@ sources:
 - https://github.com/longhorn/longhorn-manager
 - https://github.com/longhorn/longhorn-ui
 - https://github.com/longhorn/longhorn-tests
-version: 1.1.000-rc00
+version: 1.1.001-rc00

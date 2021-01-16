@@ -1,6 +1,6 @@
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-gatekeeper/Chart.yaml dev-v2.5-source-alt/charts/rancher-gatekeeper/Chart.yaml
---- dev-v2.5-source/charts/rancher-gatekeeper/Chart.yaml	2021-01-15 14:07:36.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-gatekeeper/Chart.yaml	2021-01-15 14:24:17.000000000 -0800
+--- dev-v2.5-source/charts/rancher-gatekeeper/Chart.yaml	2021-01-15 18:33:06.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-gatekeeper/Chart.yaml	2021-01-15 18:33:18.000000000 -0800
 @@ -1,22 +1,23 @@
 +annotations:
 +  catalog.cattle.io/auto-install: rancher-gatekeeper-crd=match
@@ -40,10 +40,10 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-gatekeeper/Chart
 -  catalog.cattle.io/os: linux
 -  catalog.cattle.io/auto-install: rancher-gatekeeper-crd=match
 +- https://github.com/open-policy-agent/gatekeeper.git
-+version: 3.2.101-rc00
++version: 3.2.102-rc00
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-gatekeeper/charts-crd/Chart.yaml dev-v2.5-source-alt/charts/rancher-gatekeeper/charts-crd/Chart.yaml
---- dev-v2.5-source/charts/rancher-gatekeeper/charts-crd/Chart.yaml	2021-01-15 14:07:36.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-gatekeeper/charts-crd/Chart.yaml	2021-01-15 14:24:17.000000000 -0800
+--- dev-v2.5-source/charts/rancher-gatekeeper/charts-crd/Chart.yaml	2021-01-15 18:33:06.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-gatekeeper/charts-crd/Chart.yaml	2021-01-15 18:33:18.000000000 -0800
 @@ -1,11 +1,11 @@
 +annotations:
 +  catalog.cattle.io/certified: rancher
@@ -62,10 +62,10 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-gatekeeper/chart
 -  catalog.cattle.io/certified: rancher
 -  catalog.cattle.io/experimental: true
 -  catalog.cattle.io/namespace: cattle-gatekeeper-system
-+version: 3.2.101-rc00
++version: 3.2.102-rc00
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-gatekeeper/templates/validate-install-crd.yaml dev-v2.5-source-alt/charts/rancher-gatekeeper/templates/validate-install-crd.yaml
---- dev-v2.5-source/charts/rancher-gatekeeper/templates/validate-install-crd.yaml	2021-01-15 14:07:36.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-gatekeeper/templates/validate-install-crd.yaml	2021-01-15 14:24:17.000000000 -0800
+--- dev-v2.5-source/charts/rancher-gatekeeper/templates/validate-install-crd.yaml	2021-01-15 18:33:06.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-gatekeeper/templates/validate-install-crd.yaml	2021-01-15 18:33:18.000000000 -0800
 @@ -11,7 +11,7 @@
  # {{- end -}}
  # {{- range $_, $exists := $found -}}

@@ -20,4 +20,4 @@ keywords:
 name: rancher-gatekeeper
 sources:
 - https://github.com/open-policy-agent/gatekeeper.git
-version: 3.2.101-rc00
+version: 3.2.102-rc00

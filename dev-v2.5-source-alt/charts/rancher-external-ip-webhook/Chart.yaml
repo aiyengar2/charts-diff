@@ -21,4 +21,4 @@ maintainers:
 name: rancher-external-ip-webhook
 sources:
 - https://github.com/rancher/externalip-webhook
-version: 0.1.600-rc00
+version: 0.1.601-rc00

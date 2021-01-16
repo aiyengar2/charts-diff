@@ -1,6 +1,6 @@
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/Chart.yaml dev-v2.5-source-alt/charts/rancher-monitoring/Chart.yaml
---- dev-v2.5-source/charts/rancher-monitoring/Chart.yaml	2021-01-15 14:07:36.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/Chart.yaml	2021-01-15 14:24:17.000000000 -0800
+--- dev-v2.5-source/charts/rancher-monitoring/Chart.yaml	2021-01-15 18:33:07.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/Chart.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -5,37 +5,40 @@
      - name: Upstream Project
        url: https://github.com/prometheus-operator/kube-prometheus
@@ -63,14 +63,14 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/Chart
 -version: 9.4.202
 +- https://github.com/prometheus-community/helm-charts
 +- https://github.com/prometheus-operator/kube-prometheus
-+version: 9.4.202-rc00
++version: 9.4.203-rc00
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/grafana/ci/default-values.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/grafana/ci/default-values.yaml
---- dev-v2.5-source/charts/rancher-monitoring/charts/grafana/ci/default-values.yaml	2021-01-15 14:07:36.000000000 -0800
+--- dev-v2.5-source/charts/rancher-monitoring/charts/grafana/ci/default-values.yaml	2021-01-15 18:33:07.000000000 -0800
 +++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/grafana/ci/default-values.yaml	1969-12-31 16:00:00.000000000 -0800
 @@ -1 +0,0 @@
 -# Leave this file empty to ensure that CI runs builds against the default configuration in values.yaml.
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/grafana/ci/with-dashboard-json-values.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/grafana/ci/with-dashboard-json-values.yaml
---- dev-v2.5-source/charts/rancher-monitoring/charts/grafana/ci/with-dashboard-json-values.yaml	2021-01-15 14:07:36.000000000 -0800
+--- dev-v2.5-source/charts/rancher-monitoring/charts/grafana/ci/with-dashboard-json-values.yaml	2021-01-15 18:33:07.000000000 -0800
 +++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/grafana/ci/with-dashboard-json-values.yaml	1969-12-31 16:00:00.000000000 -0800
 @@ -1,53 +0,0 @@
 -dashboards:
@@ -127,7 +127,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 -        }
 -      datasource: Prometheus
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/grafana/ci/with-dashboard-values.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/grafana/ci/with-dashboard-values.yaml
---- dev-v2.5-source/charts/rancher-monitoring/charts/grafana/ci/with-dashboard-values.yaml	2021-01-15 14:07:36.000000000 -0800
+--- dev-v2.5-source/charts/rancher-monitoring/charts/grafana/ci/with-dashboard-values.yaml	2021-01-15 18:33:07.000000000 -0800
 +++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/grafana/ci/with-dashboard-values.yaml	1969-12-31 16:00:00.000000000 -0800
 @@ -1,19 +0,0 @@
 -dashboards:
@@ -151,7 +151,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 -        path: /var/lib/grafana/dashboards/my-provider
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/k3sServer/.helmignore dev-v2.5-source-alt/charts/rancher-monitoring/charts/k3sServer/.helmignore
 --- dev-v2.5-source/charts/rancher-monitoring/charts/k3sServer/.helmignore	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/k3sServer/.helmignore	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/k3sServer/.helmignore	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,23 @@
 +# Patterns to ignore when building packages.
 +# This supports shell glob matching, relative path matching, and
@@ -178,7 +178,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +.vscode/
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/k3sServer/Chart.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/k3sServer/Chart.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/k3sServer/Chart.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/k3sServer/Chart.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/k3sServer/Chart.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,12 @@
 +annotations:
 +  catalog.cattle.io/hidden: "true"
@@ -194,7 +194,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +version: 0.1.2
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/k3sServer/README.md dev-v2.5-source-alt/charts/rancher-monitoring/charts/k3sServer/README.md
 --- dev-v2.5-source/charts/rancher-monitoring/charts/k3sServer/README.md	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/k3sServer/README.md	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/k3sServer/README.md	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,54 @@
 +# rancher-pushprox
 +
@@ -253,7 +253,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/k3sServer/templates/_helpers.tpl dev-v2.5-source-alt/charts/rancher-monitoring/charts/k3sServer/templates/_helpers.tpl
 --- dev-v2.5-source/charts/rancher-monitoring/charts/k3sServer/templates/_helpers.tpl	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/k3sServer/templates/_helpers.tpl	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/k3sServer/templates/_helpers.tpl	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,65 @@
 +# Rancher
 +
@@ -323,7 +323,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/k3sServer/templates/pushprox-clients-rbac.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/k3sServer/templates/pushprox-clients-rbac.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/k3sServer/templates/pushprox-clients-rbac.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/k3sServer/templates/pushprox-clients-rbac.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/k3sServer/templates/pushprox-clients-rbac.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,74 @@
 +{{- if .Values.clients }}{{- if .Values.clients.enabled }}
 +apiVersion: rbac.authorization.k8s.io/v1
@@ -402,7 +402,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/k3sServer/templates/pushprox-clients.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/k3sServer/templates/pushprox-clients.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/k3sServer/templates/pushprox-clients.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/k3sServer/templates/pushprox-clients.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/k3sServer/templates/pushprox-clients.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,133 @@
 +{{- if .Values.clients }}{{- if .Values.clients.enabled }}
 +apiVersion: apps/v1
@@ -540,7 +540,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/k3sServer/templates/pushprox-proxy-rbac.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/k3sServer/templates/pushprox-proxy-rbac.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/k3sServer/templates/pushprox-proxy-rbac.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/k3sServer/templates/pushprox-proxy-rbac.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/k3sServer/templates/pushprox-proxy-rbac.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,63 @@
 +{{- if and .Values.proxy }}{{ if .Values.proxy.enabled }}
 +apiVersion: rbac.authorization.k8s.io/v1
@@ -607,7 +607,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +{{- end }}{{- end }}
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/k3sServer/templates/pushprox-proxy.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/k3sServer/templates/pushprox-proxy.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/k3sServer/templates/pushprox-proxy.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/k3sServer/templates/pushprox-proxy.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/k3sServer/templates/pushprox-proxy.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,50 @@
 +{{- if and .Values.proxy }}{{ if .Values.proxy.enabled }}
 +apiVersion: apps/v1
@@ -662,7 +662,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/k3sServer/templates/pushprox-servicemonitor.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/k3sServer/templates/pushprox-servicemonitor.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/k3sServer/templates/pushprox-servicemonitor.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/k3sServer/templates/pushprox-servicemonitor.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/k3sServer/templates/pushprox-servicemonitor.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,39 @@
 +{{- if .Values.serviceMonitor }}{{- if .Values.serviceMonitor.enabled }}
 +apiVersion: monitoring.coreos.com/v1
@@ -706,7 +706,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/k3sServer/values.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/k3sServer/values.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/k3sServer/values.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/k3sServer/values.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/k3sServer/values.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,86 @@
 +# Default values for rancher-pushprox.
 +# This is a YAML-formatted file.
@@ -796,7 +796,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +  command: ["pushprox-proxy"]
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kube-state-metrics/OWNERS dev-v2.5-source-alt/charts/rancher-monitoring/charts/kube-state-metrics/OWNERS
---- dev-v2.5-source/charts/rancher-monitoring/charts/kube-state-metrics/OWNERS	2021-01-15 14:07:36.000000000 -0800
+--- dev-v2.5-source/charts/rancher-monitoring/charts/kube-state-metrics/OWNERS	2021-01-15 18:33:07.000000000 -0800
 +++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kube-state-metrics/OWNERS	1969-12-31 16:00:00.000000000 -0800
 @@ -1,8 +0,0 @@
 -approvers:
@@ -809,7 +809,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 -- mrueg
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmControllerManager/.helmignore dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmControllerManager/.helmignore
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmControllerManager/.helmignore	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmControllerManager/.helmignore	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmControllerManager/.helmignore	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,23 @@
 +# Patterns to ignore when building packages.
 +# This supports shell glob matching, relative path matching, and
@@ -836,7 +836,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +.vscode/
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmControllerManager/Chart.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmControllerManager/Chart.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmControllerManager/Chart.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmControllerManager/Chart.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmControllerManager/Chart.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,12 @@
 +annotations:
 +  catalog.cattle.io/hidden: "true"
@@ -852,7 +852,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +version: 0.1.2
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmControllerManager/README.md dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmControllerManager/README.md
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmControllerManager/README.md	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmControllerManager/README.md	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmControllerManager/README.md	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,54 @@
 +# rancher-pushprox
 +
@@ -911,7 +911,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmControllerManager/templates/_helpers.tpl dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmControllerManager/templates/_helpers.tpl
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmControllerManager/templates/_helpers.tpl	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmControllerManager/templates/_helpers.tpl	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmControllerManager/templates/_helpers.tpl	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,65 @@
 +# Rancher
 +
@@ -981,7 +981,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmControllerManager/templates/pushprox-clients-rbac.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmControllerManager/templates/pushprox-clients-rbac.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmControllerManager/templates/pushprox-clients-rbac.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmControllerManager/templates/pushprox-clients-rbac.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmControllerManager/templates/pushprox-clients-rbac.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,74 @@
 +{{- if .Values.clients }}{{- if .Values.clients.enabled }}
 +apiVersion: rbac.authorization.k8s.io/v1
@@ -1060,7 +1060,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmControllerManager/templates/pushprox-clients.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmControllerManager/templates/pushprox-clients.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmControllerManager/templates/pushprox-clients.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmControllerManager/templates/pushprox-clients.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmControllerManager/templates/pushprox-clients.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,133 @@
 +{{- if .Values.clients }}{{- if .Values.clients.enabled }}
 +apiVersion: apps/v1
@@ -1198,7 +1198,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmControllerManager/templates/pushprox-proxy-rbac.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmControllerManager/templates/pushprox-proxy-rbac.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmControllerManager/templates/pushprox-proxy-rbac.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmControllerManager/templates/pushprox-proxy-rbac.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmControllerManager/templates/pushprox-proxy-rbac.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,63 @@
 +{{- if and .Values.proxy }}{{ if .Values.proxy.enabled }}
 +apiVersion: rbac.authorization.k8s.io/v1
@@ -1265,7 +1265,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +{{- end }}{{- end }}
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmControllerManager/templates/pushprox-proxy.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmControllerManager/templates/pushprox-proxy.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmControllerManager/templates/pushprox-proxy.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmControllerManager/templates/pushprox-proxy.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmControllerManager/templates/pushprox-proxy.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,50 @@
 +{{- if and .Values.proxy }}{{ if .Values.proxy.enabled }}
 +apiVersion: apps/v1
@@ -1320,7 +1320,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmControllerManager/templates/pushprox-servicemonitor.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmControllerManager/templates/pushprox-servicemonitor.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmControllerManager/templates/pushprox-servicemonitor.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmControllerManager/templates/pushprox-servicemonitor.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmControllerManager/templates/pushprox-servicemonitor.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,39 @@
 +{{- if .Values.serviceMonitor }}{{- if .Values.serviceMonitor.enabled }}
 +apiVersion: monitoring.coreos.com/v1
@@ -1364,7 +1364,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmControllerManager/values.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmControllerManager/values.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmControllerManager/values.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmControllerManager/values.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmControllerManager/values.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,86 @@
 +# Default values for rancher-pushprox.
 +# This is a YAML-formatted file.
@@ -1455,7 +1455,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmEtcd/.helmignore dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmEtcd/.helmignore
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmEtcd/.helmignore	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmEtcd/.helmignore	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmEtcd/.helmignore	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,23 @@
 +# Patterns to ignore when building packages.
 +# This supports shell glob matching, relative path matching, and
@@ -1482,7 +1482,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +.vscode/
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmEtcd/Chart.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmEtcd/Chart.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmEtcd/Chart.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmEtcd/Chart.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmEtcd/Chart.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,12 @@
 +annotations:
 +  catalog.cattle.io/hidden: "true"
@@ -1498,7 +1498,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +version: 0.1.2
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmEtcd/README.md dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmEtcd/README.md
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmEtcd/README.md	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmEtcd/README.md	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmEtcd/README.md	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,54 @@
 +# rancher-pushprox
 +
@@ -1557,7 +1557,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmEtcd/templates/_helpers.tpl dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmEtcd/templates/_helpers.tpl
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmEtcd/templates/_helpers.tpl	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmEtcd/templates/_helpers.tpl	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmEtcd/templates/_helpers.tpl	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,65 @@
 +# Rancher
 +
@@ -1627,7 +1627,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmEtcd/templates/pushprox-clients-rbac.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmEtcd/templates/pushprox-clients-rbac.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmEtcd/templates/pushprox-clients-rbac.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmEtcd/templates/pushprox-clients-rbac.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmEtcd/templates/pushprox-clients-rbac.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,74 @@
 +{{- if .Values.clients }}{{- if .Values.clients.enabled }}
 +apiVersion: rbac.authorization.k8s.io/v1
@@ -1706,7 +1706,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmEtcd/templates/pushprox-clients.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmEtcd/templates/pushprox-clients.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmEtcd/templates/pushprox-clients.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmEtcd/templates/pushprox-clients.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmEtcd/templates/pushprox-clients.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,133 @@
 +{{- if .Values.clients }}{{- if .Values.clients.enabled }}
 +apiVersion: apps/v1
@@ -1844,7 +1844,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmEtcd/templates/pushprox-proxy-rbac.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmEtcd/templates/pushprox-proxy-rbac.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmEtcd/templates/pushprox-proxy-rbac.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmEtcd/templates/pushprox-proxy-rbac.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmEtcd/templates/pushprox-proxy-rbac.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,63 @@
 +{{- if and .Values.proxy }}{{ if .Values.proxy.enabled }}
 +apiVersion: rbac.authorization.k8s.io/v1
@@ -1911,7 +1911,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +{{- end }}{{- end }}
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmEtcd/templates/pushprox-proxy.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmEtcd/templates/pushprox-proxy.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmEtcd/templates/pushprox-proxy.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmEtcd/templates/pushprox-proxy.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmEtcd/templates/pushprox-proxy.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,50 @@
 +{{- if and .Values.proxy }}{{ if .Values.proxy.enabled }}
 +apiVersion: apps/v1
@@ -1966,7 +1966,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmEtcd/templates/pushprox-servicemonitor.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmEtcd/templates/pushprox-servicemonitor.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmEtcd/templates/pushprox-servicemonitor.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmEtcd/templates/pushprox-servicemonitor.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmEtcd/templates/pushprox-servicemonitor.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,39 @@
 +{{- if .Values.serviceMonitor }}{{- if .Values.serviceMonitor.enabled }}
 +apiVersion: monitoring.coreos.com/v1
@@ -2010,7 +2010,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmEtcd/values.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmEtcd/values.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmEtcd/values.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmEtcd/values.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmEtcd/values.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,86 @@
 +# Default values for rancher-pushprox.
 +# This is a YAML-formatted file.
@@ -2101,7 +2101,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmProxy/.helmignore dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmProxy/.helmignore
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmProxy/.helmignore	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmProxy/.helmignore	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmProxy/.helmignore	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,23 @@
 +# Patterns to ignore when building packages.
 +# This supports shell glob matching, relative path matching, and
@@ -2128,7 +2128,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +.vscode/
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmProxy/Chart.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmProxy/Chart.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmProxy/Chart.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmProxy/Chart.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmProxy/Chart.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,12 @@
 +annotations:
 +  catalog.cattle.io/hidden: "true"
@@ -2144,7 +2144,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +version: 0.1.2
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmProxy/README.md dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmProxy/README.md
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmProxy/README.md	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmProxy/README.md	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmProxy/README.md	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,54 @@
 +# rancher-pushprox
 +
@@ -2203,7 +2203,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmProxy/templates/_helpers.tpl dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmProxy/templates/_helpers.tpl
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmProxy/templates/_helpers.tpl	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmProxy/templates/_helpers.tpl	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmProxy/templates/_helpers.tpl	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,65 @@
 +# Rancher
 +
@@ -2273,7 +2273,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmProxy/templates/pushprox-clients-rbac.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmProxy/templates/pushprox-clients-rbac.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmProxy/templates/pushprox-clients-rbac.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmProxy/templates/pushprox-clients-rbac.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmProxy/templates/pushprox-clients-rbac.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,74 @@
 +{{- if .Values.clients }}{{- if .Values.clients.enabled }}
 +apiVersion: rbac.authorization.k8s.io/v1
@@ -2352,7 +2352,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmProxy/templates/pushprox-clients.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmProxy/templates/pushprox-clients.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmProxy/templates/pushprox-clients.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmProxy/templates/pushprox-clients.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmProxy/templates/pushprox-clients.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,133 @@
 +{{- if .Values.clients }}{{- if .Values.clients.enabled }}
 +apiVersion: apps/v1
@@ -2490,7 +2490,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmProxy/templates/pushprox-proxy-rbac.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmProxy/templates/pushprox-proxy-rbac.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmProxy/templates/pushprox-proxy-rbac.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmProxy/templates/pushprox-proxy-rbac.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmProxy/templates/pushprox-proxy-rbac.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,63 @@
 +{{- if and .Values.proxy }}{{ if .Values.proxy.enabled }}
 +apiVersion: rbac.authorization.k8s.io/v1
@@ -2557,7 +2557,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +{{- end }}{{- end }}
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmProxy/templates/pushprox-proxy.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmProxy/templates/pushprox-proxy.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmProxy/templates/pushprox-proxy.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmProxy/templates/pushprox-proxy.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmProxy/templates/pushprox-proxy.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,50 @@
 +{{- if and .Values.proxy }}{{ if .Values.proxy.enabled }}
 +apiVersion: apps/v1
@@ -2612,7 +2612,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmProxy/templates/pushprox-servicemonitor.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmProxy/templates/pushprox-servicemonitor.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmProxy/templates/pushprox-servicemonitor.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmProxy/templates/pushprox-servicemonitor.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmProxy/templates/pushprox-servicemonitor.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,39 @@
 +{{- if .Values.serviceMonitor }}{{- if .Values.serviceMonitor.enabled }}
 +apiVersion: monitoring.coreos.com/v1
@@ -2656,7 +2656,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmProxy/values.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmProxy/values.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmProxy/values.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmProxy/values.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmProxy/values.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,86 @@
 +# Default values for rancher-pushprox.
 +# This is a YAML-formatted file.
@@ -2747,7 +2747,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmScheduler/.helmignore dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmScheduler/.helmignore
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmScheduler/.helmignore	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmScheduler/.helmignore	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmScheduler/.helmignore	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,23 @@
 +# Patterns to ignore when building packages.
 +# This supports shell glob matching, relative path matching, and
@@ -2774,7 +2774,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +.vscode/
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmScheduler/Chart.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmScheduler/Chart.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmScheduler/Chart.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmScheduler/Chart.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmScheduler/Chart.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,12 @@
 +annotations:
 +  catalog.cattle.io/hidden: "true"
@@ -2790,7 +2790,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +version: 0.1.2
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmScheduler/README.md dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmScheduler/README.md
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmScheduler/README.md	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmScheduler/README.md	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmScheduler/README.md	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,54 @@
 +# rancher-pushprox
 +
@@ -2849,7 +2849,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmScheduler/templates/_helpers.tpl dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmScheduler/templates/_helpers.tpl
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmScheduler/templates/_helpers.tpl	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmScheduler/templates/_helpers.tpl	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmScheduler/templates/_helpers.tpl	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,65 @@
 +# Rancher
 +
@@ -2919,7 +2919,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmScheduler/templates/pushprox-clients-rbac.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmScheduler/templates/pushprox-clients-rbac.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmScheduler/templates/pushprox-clients-rbac.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmScheduler/templates/pushprox-clients-rbac.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmScheduler/templates/pushprox-clients-rbac.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,74 @@
 +{{- if .Values.clients }}{{- if .Values.clients.enabled }}
 +apiVersion: rbac.authorization.k8s.io/v1
@@ -2998,7 +2998,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmScheduler/templates/pushprox-clients.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmScheduler/templates/pushprox-clients.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmScheduler/templates/pushprox-clients.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmScheduler/templates/pushprox-clients.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmScheduler/templates/pushprox-clients.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,133 @@
 +{{- if .Values.clients }}{{- if .Values.clients.enabled }}
 +apiVersion: apps/v1
@@ -3136,7 +3136,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmScheduler/templates/pushprox-proxy-rbac.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmScheduler/templates/pushprox-proxy-rbac.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmScheduler/templates/pushprox-proxy-rbac.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmScheduler/templates/pushprox-proxy-rbac.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmScheduler/templates/pushprox-proxy-rbac.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,63 @@
 +{{- if and .Values.proxy }}{{ if .Values.proxy.enabled }}
 +apiVersion: rbac.authorization.k8s.io/v1
@@ -3203,7 +3203,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +{{- end }}{{- end }}
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmScheduler/templates/pushprox-proxy.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmScheduler/templates/pushprox-proxy.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmScheduler/templates/pushprox-proxy.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmScheduler/templates/pushprox-proxy.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmScheduler/templates/pushprox-proxy.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,50 @@
 +{{- if and .Values.proxy }}{{ if .Values.proxy.enabled }}
 +apiVersion: apps/v1
@@ -3258,7 +3258,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmScheduler/templates/pushprox-servicemonitor.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmScheduler/templates/pushprox-servicemonitor.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmScheduler/templates/pushprox-servicemonitor.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmScheduler/templates/pushprox-servicemonitor.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmScheduler/templates/pushprox-servicemonitor.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,39 @@
 +{{- if .Values.serviceMonitor }}{{- if .Values.serviceMonitor.enabled }}
 +apiVersion: monitoring.coreos.com/v1
@@ -3302,7 +3302,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmScheduler/values.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmScheduler/values.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/kubeAdmScheduler/values.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmScheduler/values.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/kubeAdmScheduler/values.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,86 @@
 +# Default values for rancher-pushprox.
 +# This is a YAML-formatted file.
@@ -3392,7 +3392,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +  command: ["pushprox-proxy"]
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/prometheus-adapter/ci/external-rules-values.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/prometheus-adapter/ci/external-rules-values.yaml
---- dev-v2.5-source/charts/rancher-monitoring/charts/prometheus-adapter/ci/external-rules-values.yaml	2021-01-15 14:07:36.000000000 -0800
+--- dev-v2.5-source/charts/rancher-monitoring/charts/prometheus-adapter/ci/external-rules-values.yaml	2021-01-15 18:33:07.000000000 -0800
 +++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/prometheus-adapter/ci/external-rules-values.yaml	1969-12-31 16:00:00.000000000 -0800
 @@ -1,9 +0,0 @@
 -rules:
@@ -3405,7 +3405,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 -      as: "my_custom_metric"
 -    metricsQuery: sum(<<.Series>>{<<.LabelMatchers>>}) by (<<.GroupBy>>)
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/prometheus-node-exporter/OWNERS dev-v2.5-source-alt/charts/rancher-monitoring/charts/prometheus-node-exporter/OWNERS
---- dev-v2.5-source/charts/rancher-monitoring/charts/prometheus-node-exporter/OWNERS	2021-01-15 14:07:36.000000000 -0800
+--- dev-v2.5-source/charts/rancher-monitoring/charts/prometheus-node-exporter/OWNERS	2021-01-15 18:33:07.000000000 -0800
 +++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/prometheus-node-exporter/OWNERS	1969-12-31 16:00:00.000000000 -0800
 @@ -1,6 +0,0 @@
 -approvers:
@@ -3416,14 +3416,14 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 -- vsliouniaev
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/prometheus-node-exporter/ci/port-values.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/prometheus-node-exporter/ci/port-values.yaml
---- dev-v2.5-source/charts/rancher-monitoring/charts/prometheus-node-exporter/ci/port-values.yaml	2021-01-15 14:07:36.000000000 -0800
+--- dev-v2.5-source/charts/rancher-monitoring/charts/prometheus-node-exporter/ci/port-values.yaml	2021-01-15 18:33:07.000000000 -0800
 +++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/prometheus-node-exporter/ci/port-values.yaml	1969-12-31 16:00:00.000000000 -0800
 @@ -1,3 +0,0 @@
 -service:
 -  targetPort: 9102
 -  port: 9102
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rancher-pushprox/.helmignore dev-v2.5-source-alt/charts/rancher-monitoring/charts/rancher-pushprox/.helmignore
---- dev-v2.5-source/charts/rancher-monitoring/charts/rancher-pushprox/.helmignore	2021-01-15 13:46:43.000000000 -0800
+--- dev-v2.5-source/charts/rancher-monitoring/charts/rancher-pushprox/.helmignore	2021-01-15 18:33:01.000000000 -0800
 +++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rancher-pushprox/.helmignore	1969-12-31 16:00:00.000000000 -0800
 @@ -1,23 +0,0 @@
 -# Patterns to ignore when building packages.
@@ -3450,7 +3450,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 -*.tmproj
 -.vscode/
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rancher-pushprox/Chart.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rancher-pushprox/Chart.yaml
---- dev-v2.5-source/charts/rancher-monitoring/charts/rancher-pushprox/Chart.yaml	2021-01-15 13:46:43.000000000 -0800
+--- dev-v2.5-source/charts/rancher-monitoring/charts/rancher-pushprox/Chart.yaml	2021-01-15 18:33:01.000000000 -0800
 +++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rancher-pushprox/Chart.yaml	1969-12-31 16:00:00.000000000 -0800
 @@ -1,12 +0,0 @@
 -annotations:
@@ -3466,7 +3466,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 -type: application
 -version: 0.1.2
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rancher-pushprox/README.md dev-v2.5-source-alt/charts/rancher-monitoring/charts/rancher-pushprox/README.md
---- dev-v2.5-source/charts/rancher-monitoring/charts/rancher-pushprox/README.md	2021-01-15 13:46:43.000000000 -0800
+--- dev-v2.5-source/charts/rancher-monitoring/charts/rancher-pushprox/README.md	2021-01-15 18:33:01.000000000 -0800
 +++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rancher-pushprox/README.md	1969-12-31 16:00:00.000000000 -0800
 @@ -1,54 +0,0 @@
 -# rancher-pushprox
@@ -3525,7 +3525,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 -See [rancher-monitoring](https://github.com/rancher/charts/tree/gh-pages/packages/rancher-monitoring) for examples of how this chart can be used.
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rancher-pushprox/templates/_helpers.tpl dev-v2.5-source-alt/charts/rancher-monitoring/charts/rancher-pushprox/templates/_helpers.tpl
---- dev-v2.5-source/charts/rancher-monitoring/charts/rancher-pushprox/templates/_helpers.tpl	2021-01-15 13:46:43.000000000 -0800
+--- dev-v2.5-source/charts/rancher-monitoring/charts/rancher-pushprox/templates/_helpers.tpl	2021-01-15 18:33:01.000000000 -0800
 +++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rancher-pushprox/templates/_helpers.tpl	1969-12-31 16:00:00.000000000 -0800
 @@ -1,65 +0,0 @@
 -# Rancher
@@ -3595,7 +3595,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 -{{- end -}}
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rancher-pushprox/templates/pushprox-clients-rbac.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rancher-pushprox/templates/pushprox-clients-rbac.yaml
---- dev-v2.5-source/charts/rancher-monitoring/charts/rancher-pushprox/templates/pushprox-clients-rbac.yaml	2021-01-15 13:46:43.000000000 -0800
+--- dev-v2.5-source/charts/rancher-monitoring/charts/rancher-pushprox/templates/pushprox-clients-rbac.yaml	2021-01-15 18:33:01.000000000 -0800
 +++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rancher-pushprox/templates/pushprox-clients-rbac.yaml	1969-12-31 16:00:00.000000000 -0800
 @@ -1,74 +0,0 @@
 -{{- if .Values.clients }}{{- if .Values.clients.enabled }}
@@ -3674,7 +3674,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 -{{- end }}{{- end }}
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rancher-pushprox/templates/pushprox-clients.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rancher-pushprox/templates/pushprox-clients.yaml
---- dev-v2.5-source/charts/rancher-monitoring/charts/rancher-pushprox/templates/pushprox-clients.yaml	2021-01-15 13:46:43.000000000 -0800
+--- dev-v2.5-source/charts/rancher-monitoring/charts/rancher-pushprox/templates/pushprox-clients.yaml	2021-01-15 18:33:01.000000000 -0800
 +++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rancher-pushprox/templates/pushprox-clients.yaml	1969-12-31 16:00:00.000000000 -0800
 @@ -1,133 +0,0 @@
 -{{- if .Values.clients }}{{- if .Values.clients.enabled }}
@@ -3812,7 +3812,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 -{{- end }}{{- end }}
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rancher-pushprox/templates/pushprox-proxy-rbac.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rancher-pushprox/templates/pushprox-proxy-rbac.yaml
---- dev-v2.5-source/charts/rancher-monitoring/charts/rancher-pushprox/templates/pushprox-proxy-rbac.yaml	2021-01-15 13:46:43.000000000 -0800
+--- dev-v2.5-source/charts/rancher-monitoring/charts/rancher-pushprox/templates/pushprox-proxy-rbac.yaml	2021-01-15 18:33:01.000000000 -0800
 +++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rancher-pushprox/templates/pushprox-proxy-rbac.yaml	1969-12-31 16:00:00.000000000 -0800
 @@ -1,63 +0,0 @@
 -{{- if and .Values.proxy }}{{ if .Values.proxy.enabled }}
@@ -3879,7 +3879,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 -    - 'secret'
 -{{- end }}{{- end }}
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rancher-pushprox/templates/pushprox-proxy.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rancher-pushprox/templates/pushprox-proxy.yaml
---- dev-v2.5-source/charts/rancher-monitoring/charts/rancher-pushprox/templates/pushprox-proxy.yaml	2021-01-15 13:46:43.000000000 -0800
+--- dev-v2.5-source/charts/rancher-monitoring/charts/rancher-pushprox/templates/pushprox-proxy.yaml	2021-01-15 18:33:01.000000000 -0800
 +++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rancher-pushprox/templates/pushprox-proxy.yaml	1969-12-31 16:00:00.000000000 -0800
 @@ -1,50 +0,0 @@
 -{{- if and .Values.proxy }}{{ if .Values.proxy.enabled }}
@@ -3934,7 +3934,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 -{{- end }}{{- end }}
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rancher-pushprox/templates/pushprox-servicemonitor.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rancher-pushprox/templates/pushprox-servicemonitor.yaml
---- dev-v2.5-source/charts/rancher-monitoring/charts/rancher-pushprox/templates/pushprox-servicemonitor.yaml	2021-01-15 13:46:43.000000000 -0800
+--- dev-v2.5-source/charts/rancher-monitoring/charts/rancher-pushprox/templates/pushprox-servicemonitor.yaml	2021-01-15 18:33:01.000000000 -0800
 +++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rancher-pushprox/templates/pushprox-servicemonitor.yaml	1969-12-31 16:00:00.000000000 -0800
 @@ -1,39 +0,0 @@
 -{{- if .Values.serviceMonitor }}{{- if .Values.serviceMonitor.enabled }}
@@ -3978,7 +3978,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 -{{- end }}{{- end }}
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rancher-pushprox/values.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rancher-pushprox/values.yaml
---- dev-v2.5-source/charts/rancher-monitoring/charts/rancher-pushprox/values.yaml	2021-01-15 13:46:43.000000000 -0800
+--- dev-v2.5-source/charts/rancher-monitoring/charts/rancher-pushprox/values.yaml	2021-01-15 18:33:01.000000000 -0800
 +++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rancher-pushprox/values.yaml	1969-12-31 16:00:00.000000000 -0800
 @@ -1,86 +0,0 @@
 -# Default values for rancher-pushprox.
@@ -4070,7 +4070,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2ControllerManager/.helmignore dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2ControllerManager/.helmignore
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2ControllerManager/.helmignore	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2ControllerManager/.helmignore	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2ControllerManager/.helmignore	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,23 @@
 +# Patterns to ignore when building packages.
 +# This supports shell glob matching, relative path matching, and
@@ -4097,7 +4097,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +.vscode/
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2ControllerManager/Chart.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2ControllerManager/Chart.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2ControllerManager/Chart.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2ControllerManager/Chart.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2ControllerManager/Chart.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,12 @@
 +annotations:
 +  catalog.cattle.io/hidden: "true"
@@ -4113,7 +4113,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +version: 0.1.2
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2ControllerManager/README.md dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2ControllerManager/README.md
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2ControllerManager/README.md	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2ControllerManager/README.md	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2ControllerManager/README.md	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,54 @@
 +# rancher-pushprox
 +
@@ -4172,7 +4172,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2ControllerManager/templates/_helpers.tpl dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2ControllerManager/templates/_helpers.tpl
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2ControllerManager/templates/_helpers.tpl	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2ControllerManager/templates/_helpers.tpl	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2ControllerManager/templates/_helpers.tpl	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,65 @@
 +# Rancher
 +
@@ -4242,7 +4242,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2ControllerManager/templates/pushprox-clients-rbac.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2ControllerManager/templates/pushprox-clients-rbac.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2ControllerManager/templates/pushprox-clients-rbac.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2ControllerManager/templates/pushprox-clients-rbac.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2ControllerManager/templates/pushprox-clients-rbac.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,74 @@
 +{{- if .Values.clients }}{{- if .Values.clients.enabled }}
 +apiVersion: rbac.authorization.k8s.io/v1
@@ -4321,7 +4321,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2ControllerManager/templates/pushprox-clients.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2ControllerManager/templates/pushprox-clients.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2ControllerManager/templates/pushprox-clients.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2ControllerManager/templates/pushprox-clients.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2ControllerManager/templates/pushprox-clients.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,133 @@
 +{{- if .Values.clients }}{{- if .Values.clients.enabled }}
 +apiVersion: apps/v1
@@ -4459,7 +4459,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2ControllerManager/templates/pushprox-proxy-rbac.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2ControllerManager/templates/pushprox-proxy-rbac.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2ControllerManager/templates/pushprox-proxy-rbac.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2ControllerManager/templates/pushprox-proxy-rbac.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2ControllerManager/templates/pushprox-proxy-rbac.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,63 @@
 +{{- if and .Values.proxy }}{{ if .Values.proxy.enabled }}
 +apiVersion: rbac.authorization.k8s.io/v1
@@ -4526,7 +4526,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +{{- end }}{{- end }}
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2ControllerManager/templates/pushprox-proxy.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2ControllerManager/templates/pushprox-proxy.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2ControllerManager/templates/pushprox-proxy.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2ControllerManager/templates/pushprox-proxy.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2ControllerManager/templates/pushprox-proxy.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,50 @@
 +{{- if and .Values.proxy }}{{ if .Values.proxy.enabled }}
 +apiVersion: apps/v1
@@ -4581,7 +4581,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2ControllerManager/templates/pushprox-servicemonitor.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2ControllerManager/templates/pushprox-servicemonitor.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2ControllerManager/templates/pushprox-servicemonitor.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2ControllerManager/templates/pushprox-servicemonitor.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2ControllerManager/templates/pushprox-servicemonitor.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,39 @@
 +{{- if .Values.serviceMonitor }}{{- if .Values.serviceMonitor.enabled }}
 +apiVersion: monitoring.coreos.com/v1
@@ -4625,7 +4625,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2ControllerManager/values.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2ControllerManager/values.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2ControllerManager/values.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2ControllerManager/values.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2ControllerManager/values.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,86 @@
 +# Default values for rancher-pushprox.
 +# This is a YAML-formatted file.
@@ -4716,7 +4716,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2Etcd/.helmignore dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Etcd/.helmignore
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2Etcd/.helmignore	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Etcd/.helmignore	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Etcd/.helmignore	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,23 @@
 +# Patterns to ignore when building packages.
 +# This supports shell glob matching, relative path matching, and
@@ -4743,7 +4743,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +.vscode/
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2Etcd/Chart.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Etcd/Chart.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2Etcd/Chart.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Etcd/Chart.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Etcd/Chart.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,12 @@
 +annotations:
 +  catalog.cattle.io/hidden: "true"
@@ -4759,7 +4759,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +version: 0.1.2
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2Etcd/README.md dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Etcd/README.md
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2Etcd/README.md	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Etcd/README.md	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Etcd/README.md	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,54 @@
 +# rancher-pushprox
 +
@@ -4818,7 +4818,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2Etcd/templates/_helpers.tpl dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Etcd/templates/_helpers.tpl
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2Etcd/templates/_helpers.tpl	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Etcd/templates/_helpers.tpl	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Etcd/templates/_helpers.tpl	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,65 @@
 +# Rancher
 +
@@ -4888,7 +4888,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2Etcd/templates/pushprox-clients-rbac.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Etcd/templates/pushprox-clients-rbac.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2Etcd/templates/pushprox-clients-rbac.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Etcd/templates/pushprox-clients-rbac.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Etcd/templates/pushprox-clients-rbac.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,74 @@
 +{{- if .Values.clients }}{{- if .Values.clients.enabled }}
 +apiVersion: rbac.authorization.k8s.io/v1
@@ -4967,7 +4967,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2Etcd/templates/pushprox-clients.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Etcd/templates/pushprox-clients.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2Etcd/templates/pushprox-clients.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Etcd/templates/pushprox-clients.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Etcd/templates/pushprox-clients.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,133 @@
 +{{- if .Values.clients }}{{- if .Values.clients.enabled }}
 +apiVersion: apps/v1
@@ -5105,7 +5105,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2Etcd/templates/pushprox-proxy-rbac.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Etcd/templates/pushprox-proxy-rbac.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2Etcd/templates/pushprox-proxy-rbac.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Etcd/templates/pushprox-proxy-rbac.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Etcd/templates/pushprox-proxy-rbac.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,63 @@
 +{{- if and .Values.proxy }}{{ if .Values.proxy.enabled }}
 +apiVersion: rbac.authorization.k8s.io/v1
@@ -5172,7 +5172,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +{{- end }}{{- end }}
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2Etcd/templates/pushprox-proxy.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Etcd/templates/pushprox-proxy.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2Etcd/templates/pushprox-proxy.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Etcd/templates/pushprox-proxy.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Etcd/templates/pushprox-proxy.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,50 @@
 +{{- if and .Values.proxy }}{{ if .Values.proxy.enabled }}
 +apiVersion: apps/v1
@@ -5227,7 +5227,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2Etcd/templates/pushprox-servicemonitor.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Etcd/templates/pushprox-servicemonitor.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2Etcd/templates/pushprox-servicemonitor.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Etcd/templates/pushprox-servicemonitor.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Etcd/templates/pushprox-servicemonitor.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,39 @@
 +{{- if .Values.serviceMonitor }}{{- if .Values.serviceMonitor.enabled }}
 +apiVersion: monitoring.coreos.com/v1
@@ -5271,7 +5271,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2Etcd/values.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Etcd/values.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2Etcd/values.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Etcd/values.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Etcd/values.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,86 @@
 +# Default values for rancher-pushprox.
 +# This is a YAML-formatted file.
@@ -5362,7 +5362,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2Proxy/.helmignore dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Proxy/.helmignore
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2Proxy/.helmignore	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Proxy/.helmignore	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Proxy/.helmignore	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,23 @@
 +# Patterns to ignore when building packages.
 +# This supports shell glob matching, relative path matching, and
@@ -5389,7 +5389,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +.vscode/
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2Proxy/Chart.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Proxy/Chart.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2Proxy/Chart.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Proxy/Chart.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Proxy/Chart.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,12 @@
 +annotations:
 +  catalog.cattle.io/hidden: "true"
@@ -5405,7 +5405,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +version: 0.1.2
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2Proxy/README.md dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Proxy/README.md
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2Proxy/README.md	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Proxy/README.md	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Proxy/README.md	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,54 @@
 +# rancher-pushprox
 +
@@ -5464,7 +5464,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2Proxy/templates/_helpers.tpl dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Proxy/templates/_helpers.tpl
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2Proxy/templates/_helpers.tpl	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Proxy/templates/_helpers.tpl	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Proxy/templates/_helpers.tpl	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,65 @@
 +# Rancher
 +
@@ -5534,7 +5534,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2Proxy/templates/pushprox-clients-rbac.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Proxy/templates/pushprox-clients-rbac.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2Proxy/templates/pushprox-clients-rbac.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Proxy/templates/pushprox-clients-rbac.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Proxy/templates/pushprox-clients-rbac.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,74 @@
 +{{- if .Values.clients }}{{- if .Values.clients.enabled }}
 +apiVersion: rbac.authorization.k8s.io/v1
@@ -5613,7 +5613,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2Proxy/templates/pushprox-clients.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Proxy/templates/pushprox-clients.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2Proxy/templates/pushprox-clients.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Proxy/templates/pushprox-clients.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Proxy/templates/pushprox-clients.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,133 @@
 +{{- if .Values.clients }}{{- if .Values.clients.enabled }}
 +apiVersion: apps/v1
@@ -5751,7 +5751,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2Proxy/templates/pushprox-proxy-rbac.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Proxy/templates/pushprox-proxy-rbac.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2Proxy/templates/pushprox-proxy-rbac.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Proxy/templates/pushprox-proxy-rbac.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Proxy/templates/pushprox-proxy-rbac.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,63 @@
 +{{- if and .Values.proxy }}{{ if .Values.proxy.enabled }}
 +apiVersion: rbac.authorization.k8s.io/v1
@@ -5818,7 +5818,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +{{- end }}{{- end }}
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2Proxy/templates/pushprox-proxy.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Proxy/templates/pushprox-proxy.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2Proxy/templates/pushprox-proxy.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Proxy/templates/pushprox-proxy.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Proxy/templates/pushprox-proxy.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,50 @@
 +{{- if and .Values.proxy }}{{ if .Values.proxy.enabled }}
 +apiVersion: apps/v1
@@ -5873,7 +5873,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2Proxy/templates/pushprox-servicemonitor.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Proxy/templates/pushprox-servicemonitor.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2Proxy/templates/pushprox-servicemonitor.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Proxy/templates/pushprox-servicemonitor.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Proxy/templates/pushprox-servicemonitor.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,39 @@
 +{{- if .Values.serviceMonitor }}{{- if .Values.serviceMonitor.enabled }}
 +apiVersion: monitoring.coreos.com/v1
@@ -5917,7 +5917,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2Proxy/values.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Proxy/values.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2Proxy/values.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Proxy/values.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Proxy/values.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,86 @@
 +# Default values for rancher-pushprox.
 +# This is a YAML-formatted file.
@@ -6008,7 +6008,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2Scheduler/.helmignore dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Scheduler/.helmignore
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2Scheduler/.helmignore	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Scheduler/.helmignore	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Scheduler/.helmignore	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,23 @@
 +# Patterns to ignore when building packages.
 +# This supports shell glob matching, relative path matching, and
@@ -6035,7 +6035,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +.vscode/
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2Scheduler/Chart.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Scheduler/Chart.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2Scheduler/Chart.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Scheduler/Chart.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Scheduler/Chart.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,12 @@
 +annotations:
 +  catalog.cattle.io/hidden: "true"
@@ -6051,7 +6051,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +version: 0.1.2
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2Scheduler/README.md dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Scheduler/README.md
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2Scheduler/README.md	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Scheduler/README.md	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Scheduler/README.md	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,54 @@
 +# rancher-pushprox
 +
@@ -6110,7 +6110,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2Scheduler/templates/_helpers.tpl dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Scheduler/templates/_helpers.tpl
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2Scheduler/templates/_helpers.tpl	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Scheduler/templates/_helpers.tpl	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Scheduler/templates/_helpers.tpl	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,65 @@
 +# Rancher
 +
@@ -6180,7 +6180,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2Scheduler/templates/pushprox-clients-rbac.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Scheduler/templates/pushprox-clients-rbac.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2Scheduler/templates/pushprox-clients-rbac.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Scheduler/templates/pushprox-clients-rbac.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Scheduler/templates/pushprox-clients-rbac.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,74 @@
 +{{- if .Values.clients }}{{- if .Values.clients.enabled }}
 +apiVersion: rbac.authorization.k8s.io/v1
@@ -6259,7 +6259,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2Scheduler/templates/pushprox-clients.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Scheduler/templates/pushprox-clients.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2Scheduler/templates/pushprox-clients.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Scheduler/templates/pushprox-clients.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Scheduler/templates/pushprox-clients.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,133 @@
 +{{- if .Values.clients }}{{- if .Values.clients.enabled }}
 +apiVersion: apps/v1
@@ -6397,7 +6397,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2Scheduler/templates/pushprox-proxy-rbac.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Scheduler/templates/pushprox-proxy-rbac.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2Scheduler/templates/pushprox-proxy-rbac.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Scheduler/templates/pushprox-proxy-rbac.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Scheduler/templates/pushprox-proxy-rbac.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,63 @@
 +{{- if and .Values.proxy }}{{ if .Values.proxy.enabled }}
 +apiVersion: rbac.authorization.k8s.io/v1
@@ -6464,7 +6464,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +{{- end }}{{- end }}
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2Scheduler/templates/pushprox-proxy.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Scheduler/templates/pushprox-proxy.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2Scheduler/templates/pushprox-proxy.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Scheduler/templates/pushprox-proxy.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Scheduler/templates/pushprox-proxy.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,50 @@
 +{{- if and .Values.proxy }}{{ if .Values.proxy.enabled }}
 +apiVersion: apps/v1
@@ -6519,7 +6519,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2Scheduler/templates/pushprox-servicemonitor.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Scheduler/templates/pushprox-servicemonitor.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2Scheduler/templates/pushprox-servicemonitor.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Scheduler/templates/pushprox-servicemonitor.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Scheduler/templates/pushprox-servicemonitor.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,39 @@
 +{{- if .Values.serviceMonitor }}{{- if .Values.serviceMonitor.enabled }}
 +apiVersion: monitoring.coreos.com/v1
@@ -6563,7 +6563,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rke2Scheduler/values.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Scheduler/values.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rke2Scheduler/values.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Scheduler/values.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rke2Scheduler/values.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,86 @@
 +# Default values for rancher-pushprox.
 +# This is a YAML-formatted file.
@@ -6654,7 +6654,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeControllerManager/.helmignore dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeControllerManager/.helmignore
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeControllerManager/.helmignore	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeControllerManager/.helmignore	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeControllerManager/.helmignore	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,23 @@
 +# Patterns to ignore when building packages.
 +# This supports shell glob matching, relative path matching, and
@@ -6681,7 +6681,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +.vscode/
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeControllerManager/Chart.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeControllerManager/Chart.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeControllerManager/Chart.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeControllerManager/Chart.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeControllerManager/Chart.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,12 @@
 +annotations:
 +  catalog.cattle.io/hidden: "true"
@@ -6697,7 +6697,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +version: 0.1.2
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeControllerManager/README.md dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeControllerManager/README.md
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeControllerManager/README.md	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeControllerManager/README.md	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeControllerManager/README.md	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,54 @@
 +# rancher-pushprox
 +
@@ -6756,7 +6756,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeControllerManager/templates/_helpers.tpl dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeControllerManager/templates/_helpers.tpl
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeControllerManager/templates/_helpers.tpl	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeControllerManager/templates/_helpers.tpl	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeControllerManager/templates/_helpers.tpl	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,65 @@
 +# Rancher
 +
@@ -6826,7 +6826,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeControllerManager/templates/pushprox-clients-rbac.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeControllerManager/templates/pushprox-clients-rbac.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeControllerManager/templates/pushprox-clients-rbac.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeControllerManager/templates/pushprox-clients-rbac.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeControllerManager/templates/pushprox-clients-rbac.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,74 @@
 +{{- if .Values.clients }}{{- if .Values.clients.enabled }}
 +apiVersion: rbac.authorization.k8s.io/v1
@@ -6905,7 +6905,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeControllerManager/templates/pushprox-clients.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeControllerManager/templates/pushprox-clients.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeControllerManager/templates/pushprox-clients.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeControllerManager/templates/pushprox-clients.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeControllerManager/templates/pushprox-clients.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,133 @@
 +{{- if .Values.clients }}{{- if .Values.clients.enabled }}
 +apiVersion: apps/v1
@@ -7043,7 +7043,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeControllerManager/templates/pushprox-proxy-rbac.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeControllerManager/templates/pushprox-proxy-rbac.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeControllerManager/templates/pushprox-proxy-rbac.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeControllerManager/templates/pushprox-proxy-rbac.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeControllerManager/templates/pushprox-proxy-rbac.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,63 @@
 +{{- if and .Values.proxy }}{{ if .Values.proxy.enabled }}
 +apiVersion: rbac.authorization.k8s.io/v1
@@ -7110,7 +7110,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +{{- end }}{{- end }}
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeControllerManager/templates/pushprox-proxy.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeControllerManager/templates/pushprox-proxy.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeControllerManager/templates/pushprox-proxy.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeControllerManager/templates/pushprox-proxy.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeControllerManager/templates/pushprox-proxy.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,50 @@
 +{{- if and .Values.proxy }}{{ if .Values.proxy.enabled }}
 +apiVersion: apps/v1
@@ -7165,7 +7165,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeControllerManager/templates/pushprox-servicemonitor.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeControllerManager/templates/pushprox-servicemonitor.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeControllerManager/templates/pushprox-servicemonitor.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeControllerManager/templates/pushprox-servicemonitor.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeControllerManager/templates/pushprox-servicemonitor.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,39 @@
 +{{- if .Values.serviceMonitor }}{{- if .Values.serviceMonitor.enabled }}
 +apiVersion: monitoring.coreos.com/v1
@@ -7209,7 +7209,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeControllerManager/values.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeControllerManager/values.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeControllerManager/values.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeControllerManager/values.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeControllerManager/values.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,86 @@
 +# Default values for rancher-pushprox.
 +# This is a YAML-formatted file.
@@ -7300,7 +7300,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeEtcd/.helmignore dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeEtcd/.helmignore
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeEtcd/.helmignore	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeEtcd/.helmignore	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeEtcd/.helmignore	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,23 @@
 +# Patterns to ignore when building packages.
 +# This supports shell glob matching, relative path matching, and
@@ -7327,7 +7327,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +.vscode/
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeEtcd/Chart.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeEtcd/Chart.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeEtcd/Chart.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeEtcd/Chart.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeEtcd/Chart.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,12 @@
 +annotations:
 +  catalog.cattle.io/hidden: "true"
@@ -7343,7 +7343,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +version: 0.1.2
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeEtcd/README.md dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeEtcd/README.md
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeEtcd/README.md	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeEtcd/README.md	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeEtcd/README.md	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,54 @@
 +# rancher-pushprox
 +
@@ -7402,7 +7402,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeEtcd/templates/_helpers.tpl dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeEtcd/templates/_helpers.tpl
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeEtcd/templates/_helpers.tpl	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeEtcd/templates/_helpers.tpl	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeEtcd/templates/_helpers.tpl	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,65 @@
 +# Rancher
 +
@@ -7472,7 +7472,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeEtcd/templates/pushprox-clients-rbac.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeEtcd/templates/pushprox-clients-rbac.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeEtcd/templates/pushprox-clients-rbac.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeEtcd/templates/pushprox-clients-rbac.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeEtcd/templates/pushprox-clients-rbac.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,74 @@
 +{{- if .Values.clients }}{{- if .Values.clients.enabled }}
 +apiVersion: rbac.authorization.k8s.io/v1
@@ -7551,7 +7551,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeEtcd/templates/pushprox-clients.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeEtcd/templates/pushprox-clients.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeEtcd/templates/pushprox-clients.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeEtcd/templates/pushprox-clients.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeEtcd/templates/pushprox-clients.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,133 @@
 +{{- if .Values.clients }}{{- if .Values.clients.enabled }}
 +apiVersion: apps/v1
@@ -7689,7 +7689,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeEtcd/templates/pushprox-proxy-rbac.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeEtcd/templates/pushprox-proxy-rbac.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeEtcd/templates/pushprox-proxy-rbac.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeEtcd/templates/pushprox-proxy-rbac.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeEtcd/templates/pushprox-proxy-rbac.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,63 @@
 +{{- if and .Values.proxy }}{{ if .Values.proxy.enabled }}
 +apiVersion: rbac.authorization.k8s.io/v1
@@ -7756,7 +7756,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +{{- end }}{{- end }}
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeEtcd/templates/pushprox-proxy.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeEtcd/templates/pushprox-proxy.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeEtcd/templates/pushprox-proxy.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeEtcd/templates/pushprox-proxy.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeEtcd/templates/pushprox-proxy.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,50 @@
 +{{- if and .Values.proxy }}{{ if .Values.proxy.enabled }}
 +apiVersion: apps/v1
@@ -7811,7 +7811,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeEtcd/templates/pushprox-servicemonitor.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeEtcd/templates/pushprox-servicemonitor.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeEtcd/templates/pushprox-servicemonitor.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeEtcd/templates/pushprox-servicemonitor.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeEtcd/templates/pushprox-servicemonitor.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,39 @@
 +{{- if .Values.serviceMonitor }}{{- if .Values.serviceMonitor.enabled }}
 +apiVersion: monitoring.coreos.com/v1
@@ -7855,7 +7855,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeEtcd/values.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeEtcd/values.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeEtcd/values.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeEtcd/values.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeEtcd/values.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,86 @@
 +# Default values for rancher-pushprox.
 +# This is a YAML-formatted file.
@@ -7946,7 +7946,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeProxy/.helmignore dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeProxy/.helmignore
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeProxy/.helmignore	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeProxy/.helmignore	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeProxy/.helmignore	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,23 @@
 +# Patterns to ignore when building packages.
 +# This supports shell glob matching, relative path matching, and
@@ -7973,7 +7973,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +.vscode/
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeProxy/Chart.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeProxy/Chart.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeProxy/Chart.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeProxy/Chart.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeProxy/Chart.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,12 @@
 +annotations:
 +  catalog.cattle.io/hidden: "true"
@@ -7989,7 +7989,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +version: 0.1.2
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeProxy/README.md dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeProxy/README.md
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeProxy/README.md	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeProxy/README.md	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeProxy/README.md	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,54 @@
 +# rancher-pushprox
 +
@@ -8048,7 +8048,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeProxy/templates/_helpers.tpl dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeProxy/templates/_helpers.tpl
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeProxy/templates/_helpers.tpl	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeProxy/templates/_helpers.tpl	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeProxy/templates/_helpers.tpl	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,65 @@
 +# Rancher
 +
@@ -8118,7 +8118,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeProxy/templates/pushprox-clients-rbac.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeProxy/templates/pushprox-clients-rbac.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeProxy/templates/pushprox-clients-rbac.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeProxy/templates/pushprox-clients-rbac.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeProxy/templates/pushprox-clients-rbac.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,74 @@
 +{{- if .Values.clients }}{{- if .Values.clients.enabled }}
 +apiVersion: rbac.authorization.k8s.io/v1
@@ -8197,7 +8197,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeProxy/templates/pushprox-clients.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeProxy/templates/pushprox-clients.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeProxy/templates/pushprox-clients.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeProxy/templates/pushprox-clients.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeProxy/templates/pushprox-clients.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,133 @@
 +{{- if .Values.clients }}{{- if .Values.clients.enabled }}
 +apiVersion: apps/v1
@@ -8335,7 +8335,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeProxy/templates/pushprox-proxy-rbac.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeProxy/templates/pushprox-proxy-rbac.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeProxy/templates/pushprox-proxy-rbac.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeProxy/templates/pushprox-proxy-rbac.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeProxy/templates/pushprox-proxy-rbac.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,63 @@
 +{{- if and .Values.proxy }}{{ if .Values.proxy.enabled }}
 +apiVersion: rbac.authorization.k8s.io/v1
@@ -8402,7 +8402,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +{{- end }}{{- end }}
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeProxy/templates/pushprox-proxy.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeProxy/templates/pushprox-proxy.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeProxy/templates/pushprox-proxy.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeProxy/templates/pushprox-proxy.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeProxy/templates/pushprox-proxy.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,50 @@
 +{{- if and .Values.proxy }}{{ if .Values.proxy.enabled }}
 +apiVersion: apps/v1
@@ -8457,7 +8457,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeProxy/templates/pushprox-servicemonitor.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeProxy/templates/pushprox-servicemonitor.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeProxy/templates/pushprox-servicemonitor.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeProxy/templates/pushprox-servicemonitor.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeProxy/templates/pushprox-servicemonitor.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,39 @@
 +{{- if .Values.serviceMonitor }}{{- if .Values.serviceMonitor.enabled }}
 +apiVersion: monitoring.coreos.com/v1
@@ -8501,7 +8501,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeProxy/values.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeProxy/values.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeProxy/values.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeProxy/values.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeProxy/values.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,86 @@
 +# Default values for rancher-pushprox.
 +# This is a YAML-formatted file.
@@ -8592,7 +8592,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeScheduler/.helmignore dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeScheduler/.helmignore
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeScheduler/.helmignore	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeScheduler/.helmignore	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeScheduler/.helmignore	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,23 @@
 +# Patterns to ignore when building packages.
 +# This supports shell glob matching, relative path matching, and
@@ -8619,7 +8619,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +.vscode/
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeScheduler/Chart.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeScheduler/Chart.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeScheduler/Chart.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeScheduler/Chart.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeScheduler/Chart.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,12 @@
 +annotations:
 +  catalog.cattle.io/hidden: "true"
@@ -8635,7 +8635,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +version: 0.1.2
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeScheduler/README.md dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeScheduler/README.md
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeScheduler/README.md	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeScheduler/README.md	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeScheduler/README.md	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,54 @@
 +# rancher-pushprox
 +
@@ -8694,7 +8694,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeScheduler/templates/_helpers.tpl dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeScheduler/templates/_helpers.tpl
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeScheduler/templates/_helpers.tpl	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeScheduler/templates/_helpers.tpl	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeScheduler/templates/_helpers.tpl	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,65 @@
 +# Rancher
 +
@@ -8764,7 +8764,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeScheduler/templates/pushprox-clients-rbac.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeScheduler/templates/pushprox-clients-rbac.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeScheduler/templates/pushprox-clients-rbac.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeScheduler/templates/pushprox-clients-rbac.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeScheduler/templates/pushprox-clients-rbac.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,74 @@
 +{{- if .Values.clients }}{{- if .Values.clients.enabled }}
 +apiVersion: rbac.authorization.k8s.io/v1
@@ -8843,7 +8843,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeScheduler/templates/pushprox-clients.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeScheduler/templates/pushprox-clients.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeScheduler/templates/pushprox-clients.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeScheduler/templates/pushprox-clients.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeScheduler/templates/pushprox-clients.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,133 @@
 +{{- if .Values.clients }}{{- if .Values.clients.enabled }}
 +apiVersion: apps/v1
@@ -8981,7 +8981,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeScheduler/templates/pushprox-proxy-rbac.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeScheduler/templates/pushprox-proxy-rbac.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeScheduler/templates/pushprox-proxy-rbac.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeScheduler/templates/pushprox-proxy-rbac.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeScheduler/templates/pushprox-proxy-rbac.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,63 @@
 +{{- if and .Values.proxy }}{{ if .Values.proxy.enabled }}
 +apiVersion: rbac.authorization.k8s.io/v1
@@ -9048,7 +9048,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +{{- end }}{{- end }}
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeScheduler/templates/pushprox-proxy.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeScheduler/templates/pushprox-proxy.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeScheduler/templates/pushprox-proxy.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeScheduler/templates/pushprox-proxy.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeScheduler/templates/pushprox-proxy.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,50 @@
 +{{- if and .Values.proxy }}{{ if .Values.proxy.enabled }}
 +apiVersion: apps/v1
@@ -9103,7 +9103,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeScheduler/templates/pushprox-servicemonitor.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeScheduler/templates/pushprox-servicemonitor.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeScheduler/templates/pushprox-servicemonitor.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeScheduler/templates/pushprox-servicemonitor.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeScheduler/templates/pushprox-servicemonitor.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,39 @@
 +{{- if .Values.serviceMonitor }}{{- if .Values.serviceMonitor.enabled }}
 +apiVersion: monitoring.coreos.com/v1
@@ -9147,7 +9147,7 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts/rkeScheduler/values.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeScheduler/values.yaml
 --- dev-v2.5-source/charts/rancher-monitoring/charts/rkeScheduler/values.yaml	1969-12-31 16:00:00.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeScheduler/values.yaml	2021-01-15 14:24:17.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts/rkeScheduler/values.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -0,0 +1,86 @@
 +# Default values for rancher-pushprox.
 +# This is a YAML-formatted file.
@@ -9237,8 +9237,8 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 +  command: ["pushprox-proxy"]
 \ No newline at end of file
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/charts-crd/Chart.yaml dev-v2.5-source-alt/charts/rancher-monitoring/charts-crd/Chart.yaml
---- dev-v2.5-source/charts/rancher-monitoring/charts-crd/Chart.yaml	2021-01-15 14:07:36.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/charts-crd/Chart.yaml	2021-01-15 14:24:17.000000000 -0800
+--- dev-v2.5-source/charts/rancher-monitoring/charts-crd/Chart.yaml	2021-01-15 18:33:07.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/charts-crd/Chart.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -1,10 +1,10 @@
 +annotations:
 +  catalog.cattle.io/certified: rancher
@@ -9255,10 +9255,10 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/chart
 -  catalog.cattle.io/release-name: rancher-monitoring-crd
 -  catalog.cattle.io/certified: rancher
 -  catalog.cattle.io/namespace: cattle-monitoring-system
-+version: 9.4.202-rc00
++version: 9.4.203-rc00
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/requirements.yaml dev-v2.5-source-alt/charts/rancher-monitoring/requirements.yaml
---- dev-v2.5-source/charts/rancher-monitoring/requirements.yaml	2021-01-15 14:07:36.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/requirements.yaml	2021-01-15 14:24:17.000000000 -0800
+--- dev-v2.5-source/charts/rancher-monitoring/requirements.yaml	2021-01-15 18:33:07.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/requirements.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -1,96 +1,137 @@
  dependencies:
 -  - name: kube-state-metrics
@@ -9494,8 +9494,8 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/requi
 +  importvalues: []
 +  alias: ""
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-monitoring/templates/validate-install-crd.yaml dev-v2.5-source-alt/charts/rancher-monitoring/templates/validate-install-crd.yaml
---- dev-v2.5-source/charts/rancher-monitoring/templates/validate-install-crd.yaml	2021-01-15 14:07:36.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-monitoring/templates/validate-install-crd.yaml	2021-01-15 14:24:17.000000000 -0800
+--- dev-v2.5-source/charts/rancher-monitoring/templates/validate-install-crd.yaml	2021-01-15 18:33:07.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-monitoring/templates/validate-install-crd.yaml	2021-01-15 18:33:21.000000000 -0800
 @@ -13,7 +13,7 @@
  # {{- end -}}
  # {{- range $_, $exists := $found -}}

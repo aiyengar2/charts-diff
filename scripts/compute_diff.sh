@@ -1,6 +1,7 @@
 #!/bin/bash
 
 cd $(dirname $0)
+cd ..
 
 rm -rf diff
 mkdir -p diff

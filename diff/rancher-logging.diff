@@ -1,6 +1,6 @@
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-logging/Chart.yaml dev-v2.5-source-alt/charts/rancher-logging/Chart.yaml
---- dev-v2.5-source/charts/rancher-logging/Chart.yaml	2021-01-15 14:07:36.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-logging/Chart.yaml	2021-01-15 14:24:17.000000000 -0800
+--- dev-v2.5-source/charts/rancher-logging/Chart.yaml	2021-01-15 18:33:07.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-logging/Chart.yaml	2021-01-15 18:33:19.000000000 -0800
 @@ -1,19 +1,20 @@
 -apiVersion: v1
 -appVersion: 3.8.2
@@ -35,10 +35,10 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-logging/Chart.ya
 +- monitoring
 +- security
 +name: rancher-logging
-+version: 3.8.201-rc00
++version: 3.8.202-rc00
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-logging/charts-crd/Chart.yaml dev-v2.5-source-alt/charts/rancher-logging/charts-crd/Chart.yaml
---- dev-v2.5-source/charts/rancher-logging/charts-crd/Chart.yaml	2021-01-15 14:07:36.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-logging/charts-crd/Chart.yaml	2021-01-15 14:24:17.000000000 -0800
+--- dev-v2.5-source/charts/rancher-logging/charts-crd/Chart.yaml	2021-01-15 18:33:07.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-logging/charts-crd/Chart.yaml	2021-01-15 18:33:19.000000000 -0800
 @@ -1,10 +1,10 @@
 +annotations:
 +  catalog.cattle.io/certified: rancher
@@ -55,10 +55,10 @@ diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-logging/charts-c
 -  catalog.cattle.io/release-name: rancher-logging-crd
 -  catalog.cattle.io/certified: rancher
 -  catalog.cattle.io/namespace: cattle-logging-system
-+version: 3.8.201-rc00
++version: 3.8.202-rc00
 diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-logging/templates/validate-install-crd.yaml dev-v2.5-source-alt/charts/rancher-logging/templates/validate-install-crd.yaml
---- dev-v2.5-source/charts/rancher-logging/templates/validate-install-crd.yaml	2021-01-15 14:07:36.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-logging/templates/validate-install-crd.yaml	2021-01-15 14:24:17.000000000 -0800
+--- dev-v2.5-source/charts/rancher-logging/templates/validate-install-crd.yaml	2021-01-15 18:33:07.000000000 -0800
++++ dev-v2.5-source-alt/charts/rancher-logging/templates/validate-install-crd.yaml	2021-01-15 18:33:19.000000000 -0800
 @@ -12,7 +12,7 @@
  # {{- end -}}
  # {{- range $_, $exists := $found -}}
