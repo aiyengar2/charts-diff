@@ -1,9 +1,0 @@
-diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/fleet/Chart.yaml dev-v2.5-source-alt/charts/fleet/Chart.yaml
---- dev-v2.5-source/charts/fleet/Chart.yaml	2021-01-15 18:33:05.000000000 -0800
-+++ dev-v2.5-source-alt/charts/fleet/Chart.yaml	2021-01-15 18:33:16.000000000 -0800
-@@ -12,4 +12,4 @@
- description: Fleet Manager - GitOps at Scale
- icon: https://charts.rancher.io/assets/logos/fleet.svg
- name: fleet
--version: 0.3.300
-+version: 0.3.301-rc00

@@ -1,9 +1,0 @@
-diff -x '*.tgz' -x '*.lock' -uNr dev-v2.5-source/charts/rancher-operator-crd/Chart.yaml dev-v2.5-source-alt/charts/rancher-operator-crd/Chart.yaml
---- dev-v2.5-source/charts/rancher-operator-crd/Chart.yaml	2021-01-15 18:33:08.000000000 -0800
-+++ dev-v2.5-source-alt/charts/rancher-operator-crd/Chart.yaml	2021-01-15 18:33:22.000000000 -0800
-@@ -8,4 +8,4 @@
- appVersion: 0.1.2
- description: Rancher Operator CustomResourceDefinitions
- name: rancher-operator-crd
--version: 0.1.200
-+version: 0.1.201-rc00
