@@ -1,26 +1,31 @@
 #!/bin/bash
 
 cd $(dirname $0)
+source ./config
+
 cd ..
 
-rm -rf main-source
-rm -rf migrate-source
+rm -rf ${FROM_BRANCH}
+rm -rf ${TO_BRANCH}
 rm -rf diff
-rm -rf rke2-charts
+rm -rf $(basename ${FROM_REPO})
+rm -rf $(basename ${TO_REPO})
 
-mkdir -p main-source/charts
-mkdir -p migrate-source/charts
+mkdir -p ${FROM_BRANCH}/charts
+mkdir -p ${TO_BRANCH}/charts
 
-git clone --depth 1 --branch main-source https://github.com/rancher/rke2-charts 2>/dev/null
-pushd rke2-charts
+REPO_DIR=$(basename ${FROM_REPO})
+git clone --depth 1 --branch ${FROM_BRANCH} ${FROM_REPO} 2>/dev/null
+pushd ${REPO_DIR}
 make charts
 popd
-mv rke2-charts/charts/* main-source/charts
-rm -rf rke2-charts
+mv ${REPO_DIR}/charts/* ${FROM_BRANCH}/charts
+rm -rf ${REPO_DIR}
 
-git clone --depth 1 --branch migrate-source https://github.com/aiyengar2/rke2-charts 2>/dev/null
-pushd rke2-charts
+REPO_DIR=$(basename ${TO_REPO})
+git clone --depth 1 --branch ${TO_BRANCH} ${TO_REPO} 2>/dev/null
+pushd ${REPO_DIR}
 make charts
 popd
-mv rke2-charts/charts/* migrate-source/charts
-rm -rf rke2-charts
+mv ${REPO_DIR}/charts/* ${TO_BRANCH}/charts
+rm -rf ${REPO_DIR}

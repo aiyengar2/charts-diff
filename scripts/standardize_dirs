@@ -2,22 +2,24 @@
 set -e
 
 cd $(dirname $0)
+source ./config
+
 cd ..
 
-for f in migrate-source/charts/*/*/*; do
+for f in ${TO_BRANCH}/charts/*/*/*; do
     chart_name=$(echo ${f} | cut -d'/' -f4)
     if [[ ${chart_name} == *-crd ]] && [[ ${chart_name} != "fleet-crd" ]] && [[ ${chart_name} != "rancher-operator-crd" ]]; then
         chart_name=${chart_name/-crd/\/charts-crd}
     fi
-    dest="migrate-source/new-charts/${chart_name}"
+    dest="${TO_BRANCH}/new-charts/${chart_name}"
     mkdir -p ${dest}
     mv ${f}/* ${dest}
 done
 
-rm -rf migrate-source/charts
-mv migrate-source/new-charts migrate-source/charts
+rm -rf ${TO_BRANCH}/charts
+mv ${TO_BRANCH}/new-charts ${TO_BRANCH}/charts
 
-for f in $(find main-source -type f -name "*.tgz"); do
+for f in $(find ${FROM_BRANCH} -type f -name "*.tgz"); do
     tar -xvzf ${f} -C $(dirname ${f})
     rm ${f}
 done

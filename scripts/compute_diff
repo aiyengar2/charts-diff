@@ -1,11 +1,13 @@
 #!/bin/bash
 
 cd $(dirname $0)
+source ./config
+
 cd ..
 
 rm -rf diff
 mkdir -p diff
 
-for f in main-source/charts/*; do
-    diff -x '*.tgz' -x '*.lock' -uNr ${f} ${f/main-source/migrate-source} > diff/$(basename -- ${f}).diff
+for f in ${FROM_BRANCH}/charts/*; do
+    diff -x '*.tgz' -x '*.lock' -uNr ${f} ${f/${FROM_BRANCH}/${TO_BRANCH}} > diff/$(basename -- ${f}).diff
 done
