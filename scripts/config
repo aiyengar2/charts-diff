@@ -1,7 +1,5 @@
 #!/bin/bash
 
-cd $(dirname $0)
-
 FROM_REPO=https://github.com/rancher/rke2-charts
 FROM_BRANCH=main-source
 

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+cd $(dirname $0)
+source ./config
+
+cd ..
+
+rm -rf ${FROM_BRANCH}
+rm -rf ${TO_BRANCH}
+rm -rf diff
+rm -rf $(basename ${FROM_REPO})
+rm -rf $(basename ${TO_REPO})
