@@ -1,0 +1,9 @@
+diff -x '*.tgz' -x '*.lock' -uNr release-v2.5/charts/rancher-vsphere-cpi/rancher-vsphere-cpi/latest/Chart.yaml dev-v2.5-source/charts/rancher-vsphere-cpi/rancher-vsphere-cpi/latest/Chart.yaml
+--- release-v2.5/charts/rancher-vsphere-cpi/rancher-vsphere-cpi/latest/Chart.yaml	2021-03-04 13:07:14.000000000 -0800
++++ dev-v2.5-source/charts/rancher-vsphere-cpi/rancher-vsphere-cpi/latest/Chart.yaml	2021-03-04 13:07:24.000000000 -0800
+@@ -16,4 +16,4 @@
+ name: rancher-vsphere-cpi
+ sources:
+ - https://github.com/kubernetes/cloud-provider-vsphere
+-version: 1.0.000
++version: 1.0.000-rc01

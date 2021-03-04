@@ -1,0 +1,18 @@
+diff -x '*.tgz' -x '*.lock' -uNr release-v2.5/charts/rancher-backup/rancher-backup/latest/Chart.yaml dev-v2.5-source/charts/rancher-backup/rancher-backup/latest/Chart.yaml
+--- release-v2.5/charts/rancher-backup/rancher-backup/latest/Chart.yaml	2021-03-04 13:07:14.000000000 -0800
++++ dev-v2.5-source/charts/rancher-backup/rancher-backup/latest/Chart.yaml	2021-03-04 13:07:20.000000000 -0800
+@@ -17,4 +17,4 @@
+ - applications
+ - infrastructure
+ name: rancher-backup
+-version: 1.0.301
++version: 1.0.301-rc01
+diff -x '*.tgz' -x '*.lock' -uNr release-v2.5/charts/rancher-backup/rancher-backup-crd/latest/Chart.yaml dev-v2.5-source/charts/rancher-backup/rancher-backup-crd/latest/Chart.yaml
+--- release-v2.5/charts/rancher-backup/rancher-backup-crd/latest/Chart.yaml	2021-03-04 13:07:13.000000000 -0800
++++ dev-v2.5-source/charts/rancher-backup/rancher-backup-crd/latest/Chart.yaml	2021-03-04 13:07:20.000000000 -0800
+@@ -7,4 +7,4 @@
+ description: Installs the CRDs for rancher-backup.
+ name: rancher-backup-crd
+ type: application
+-version: 1.0.301
++version: 1.0.301-rc01

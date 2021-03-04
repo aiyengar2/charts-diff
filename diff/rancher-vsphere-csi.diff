@@ -1,0 +1,9 @@
+diff -x '*.tgz' -x '*.lock' -uNr release-v2.5/charts/rancher-vsphere-csi/rancher-vsphere-csi/latest/Chart.yaml dev-v2.5-source/charts/rancher-vsphere-csi/rancher-vsphere-csi/latest/Chart.yaml
+--- release-v2.5/charts/rancher-vsphere-csi/rancher-vsphere-csi/latest/Chart.yaml	2021-03-04 13:07:14.000000000 -0800
++++ dev-v2.5-source/charts/rancher-vsphere-csi/rancher-vsphere-csi/latest/Chart.yaml	2021-03-04 13:07:24.000000000 -0800
+@@ -16,4 +16,4 @@
+ name: rancher-vsphere-csi
+ sources:
+ - https://github.com/kubernetes-sigs/vsphere-csi-driver
+-version: 2.1.000
++version: 2.1.000-rc01

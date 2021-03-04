@@ -1,0 +1,9 @@
+diff -x '*.tgz' -x '*.lock' -uNr release-v2.5/charts/fleet-agent/fleet-agent/latest/Chart.yaml dev-v2.5-source/charts/fleet-agent/fleet-agent/latest/Chart.yaml
+--- release-v2.5/charts/fleet-agent/fleet-agent/latest/Chart.yaml	2021-03-04 13:07:13.000000000 -0800
++++ dev-v2.5-source/charts/fleet-agent/fleet-agent/latest/Chart.yaml	2021-03-04 13:07:20.000000000 -0800
+@@ -9,4 +9,4 @@
+ description: Fleet Manager Agent - GitOps at Scale
+ icon: https://charts.rancher.io/assets/logos/fleet.svg
+ name: fleet-agent
+-version: 0.3.400
++version: 0.3.400-rc08

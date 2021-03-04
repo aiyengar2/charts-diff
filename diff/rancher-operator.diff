@@ -1,0 +1,9 @@
+diff -x '*.tgz' -x '*.lock' -uNr release-v2.5/charts/rancher-operator/rancher-operator/latest/Chart.yaml dev-v2.5-source/charts/rancher-operator/rancher-operator/latest/Chart.yaml
+--- release-v2.5/charts/rancher-operator/rancher-operator/latest/Chart.yaml	2021-03-04 13:07:14.000000000 -0800
++++ dev-v2.5-source/charts/rancher-operator/rancher-operator/latest/Chart.yaml	2021-03-04 13:07:24.000000000 -0800
+@@ -11,4 +11,4 @@
+ appVersion: 0.1.3
+ description: Control Rancher using GitOps
+ name: rancher-operator
+-version: 0.1.300
++version: 0.1.300-rc08

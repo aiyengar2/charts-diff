@@ -1,0 +1,18 @@
+diff -x '*.tgz' -x '*.lock' -uNr release-v2.5/charts/rancher-cis-benchmark/rancher-cis-benchmark/latest/Chart.yaml dev-v2.5-source/charts/rancher-cis-benchmark/rancher-cis-benchmark/latest/Chart.yaml
+--- release-v2.5/charts/rancher-cis-benchmark/rancher-cis-benchmark/latest/Chart.yaml	2021-03-04 13:07:14.000000000 -0800
++++ dev-v2.5-source/charts/rancher-cis-benchmark/rancher-cis-benchmark/latest/Chart.yaml	2021-03-04 13:07:20.000000000 -0800
+@@ -15,4 +15,4 @@
+ keywords:
+ - security
+ name: rancher-cis-benchmark
+-version: 1.0.301
++version: 1.0.301-rc01
+diff -x '*.tgz' -x '*.lock' -uNr release-v2.5/charts/rancher-cis-benchmark/rancher-cis-benchmark-crd/latest/Chart.yaml dev-v2.5-source/charts/rancher-cis-benchmark/rancher-cis-benchmark-crd/latest/Chart.yaml
+--- release-v2.5/charts/rancher-cis-benchmark/rancher-cis-benchmark-crd/latest/Chart.yaml	2021-03-04 13:07:14.000000000 -0800
++++ dev-v2.5-source/charts/rancher-cis-benchmark/rancher-cis-benchmark-crd/latest/Chart.yaml	2021-03-04 13:07:20.000000000 -0800
+@@ -7,4 +7,4 @@
+ description: Installs the CRDs for rancher-cis-benchmark.
+ name: rancher-cis-benchmark-crd
+ type: application
+-version: 1.0.301
++version: 1.0.301-rc01

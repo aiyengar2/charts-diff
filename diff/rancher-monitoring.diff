@@ -1,0 +1,18 @@
+diff -x '*.tgz' -x '*.lock' -uNr release-v2.5/charts/rancher-monitoring/rancher-monitoring/latest/Chart.yaml dev-v2.5-source/charts/rancher-monitoring/rancher-monitoring/latest/Chart.yaml
+--- release-v2.5/charts/rancher-monitoring/rancher-monitoring/latest/Chart.yaml	2021-03-04 13:07:14.000000000 -0800
++++ dev-v2.5-source/charts/rancher-monitoring/rancher-monitoring/latest/Chart.yaml	2021-03-04 13:07:24.000000000 -0800
+@@ -44,4 +44,4 @@
+ sources:
+ - https://github.com/prometheus-community/helm-charts
+ - https://github.com/prometheus-operator/kube-prometheus
+-version: 9.4.203
++version: 9.4.203-rc04
+diff -x '*.tgz' -x '*.lock' -uNr release-v2.5/charts/rancher-monitoring/rancher-monitoring-crd/latest/Chart.yaml dev-v2.5-source/charts/rancher-monitoring/rancher-monitoring-crd/latest/Chart.yaml
+--- release-v2.5/charts/rancher-monitoring/rancher-monitoring-crd/latest/Chart.yaml	2021-03-04 13:07:14.000000000 -0800
++++ dev-v2.5-source/charts/rancher-monitoring/rancher-monitoring-crd/latest/Chart.yaml	2021-03-04 13:07:24.000000000 -0800
+@@ -7,4 +7,4 @@
+ description: Installs the CRDs for rancher-monitoring.
+ name: rancher-monitoring-crd
+ type: application
+-version: 9.4.203
++version: 9.4.203-rc04

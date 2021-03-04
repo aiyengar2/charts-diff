@@ -1,0 +1,18 @@
+diff -x '*.tgz' -x '*.lock' -uNr release-v2.5/charts/rancher-gatekeeper/rancher-gatekeeper/latest/Chart.yaml dev-v2.5-source/charts/rancher-gatekeeper/rancher-gatekeeper/latest/Chart.yaml
+--- release-v2.5/charts/rancher-gatekeeper/rancher-gatekeeper/latest/Chart.yaml	2021-03-04 13:07:14.000000000 -0800
++++ dev-v2.5-source/charts/rancher-gatekeeper/rancher-gatekeeper/latest/Chart.yaml	2021-03-04 13:07:21.000000000 -0800
+@@ -19,4 +19,4 @@
+ name: rancher-gatekeeper
+ sources:
+ - https://github.com/open-policy-agent/gatekeeper.git
+-version: 3.3.000
++version: 3.3.000-rc02
+diff -x '*.tgz' -x '*.lock' -uNr release-v2.5/charts/rancher-gatekeeper/rancher-gatekeeper-crd/latest/Chart.yaml dev-v2.5-source/charts/rancher-gatekeeper/rancher-gatekeeper-crd/latest/Chart.yaml
+--- release-v2.5/charts/rancher-gatekeeper/rancher-gatekeeper-crd/latest/Chart.yaml	2021-03-04 13:07:14.000000000 -0800
++++ dev-v2.5-source/charts/rancher-gatekeeper/rancher-gatekeeper-crd/latest/Chart.yaml	2021-03-04 13:07:21.000000000 -0800
+@@ -7,4 +7,4 @@
+ description: Installs the CRDs for rancher-gatekeeper.
+ name: rancher-gatekeeper-crd
+ type: application
+-version: 3.3.000
++version: 3.3.000-rc02

@@ -1,0 +1,16 @@
+diff -x '*.tgz' -x '*.lock' -uNr release-v2.5/charts/rancher-istio/rancher-istio/latest/Chart.yaml dev-v2.5-source/charts/rancher-istio/rancher-istio/latest/Chart.yaml
+--- release-v2.5/charts/rancher-istio/rancher-istio/latest/Chart.yaml	2021-03-04 13:07:14.000000000 -0800
++++ dev-v2.5-source/charts/rancher-istio/rancher-istio/latest/Chart.yaml	2021-03-04 13:07:21.000000000 -0800
+@@ -1,5 +1,5 @@
+ annotations:
+-  catalog.cattle.io/auto-install: rancher-kiali-server-crd=1.29.000
++  catalog.cattle.io/auto-install: rancher-kiali-server-crd=1.29.000-rc00
+   catalog.cattle.io/certified: rancher
+   catalog.cattle.io/display-name: Istio
+   catalog.cattle.io/namespace: istio-system
+@@ -18,4 +18,4 @@
+ - networking
+ - infrastructure
+ name: rancher-istio
+-version: 1.8.300
++version: 1.8.300-rc01

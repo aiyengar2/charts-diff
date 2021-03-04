@@ -1,0 +1,9 @@
+diff -x '*.tgz' -x '*.lock' -uNr release-v2.5/charts/rancher-external-ip-webhook/rancher-external-ip-webhook/latest/Chart.yaml dev-v2.5-source/charts/rancher-external-ip-webhook/rancher-external-ip-webhook/latest/Chart.yaml
+--- release-v2.5/charts/rancher-external-ip-webhook/rancher-external-ip-webhook/latest/Chart.yaml	2021-03-04 13:07:14.000000000 -0800
++++ dev-v2.5-source/charts/rancher-external-ip-webhook/rancher-external-ip-webhook/latest/Chart.yaml	2021-03-04 13:07:21.000000000 -0800
+@@ -21,4 +21,4 @@
+ name: rancher-external-ip-webhook
+ sources:
+ - https://github.com/rancher/externalip-webhook
+-version: 0.1.601
++version: 0.1.601-rc01

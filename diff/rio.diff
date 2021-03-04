@@ -1,0 +1,9 @@
+diff -x '*.tgz' -x '*.lock' -uNr release-v2.5/charts/rio/rio/latest/Chart.yaml dev-v2.5-source/charts/rio/rio/latest/Chart.yaml
+--- release-v2.5/charts/rio/rio/latest/Chart.yaml	2021-03-04 13:07:14.000000000 -0800
++++ dev-v2.5-source/charts/rio/rio/latest/Chart.yaml	2021-03-04 13:07:25.000000000 -0800
+@@ -12,4 +12,4 @@
+ home: https://rio.io
+ icon: https://charts.rancher.io/assets/logos/rio.svg
+ name: rio
+-version: 0.8.001
++version: 0.8.001-rc00

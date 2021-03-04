@@ -1,0 +1,9 @@
+diff -x '*.tgz' -x '*.lock' -uNr release-v2.5/charts/rancher-webhook/rancher-webhook/latest/Chart.yaml dev-v2.5-source/charts/rancher-webhook/rancher-webhook/latest/Chart.yaml
+--- release-v2.5/charts/rancher-webhook/rancher-webhook/latest/Chart.yaml	2021-03-04 13:07:14.000000000 -0800
++++ dev-v2.5-source/charts/rancher-webhook/rancher-webhook/latest/Chart.yaml	2021-03-04 13:07:25.000000000 -0800
+@@ -8,4 +8,4 @@
+ appVersion: 0.1.0-beta9
+ description: ValidatingAdmissionWebhook for Rancher types
+ name: rancher-webhook
+-version: 0.1.0-beta901
++version: 0.1.0-beta901-rc00
