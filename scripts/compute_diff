@@ -11,3 +11,5 @@ mkdir -p diff
 for f in ${FROM_BRANCH}/charts/*; do
     diff -x '*.tgz' -x '*.lock' -uNr ${f} ${f/${FROM_BRANCH}/${TO_BRANCH}} > diff/$(basename -- ${f}).diff
 done
+
+exit 0

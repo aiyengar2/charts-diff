@@ -1,7 +1,12 @@
 #!/bin/bash
 
-FROM_REPO=https://github.com/rancher/rke2-charts
-FROM_BRANCH=main-source
+FROM_REPO=https://github.com/rancher/charts
+FROM_BRANCH=release-v2.5
 
-TO_REPO=https://github.com/aiyengar2/rke2-charts
-TO_BRANCH=migrate-source
+TO_REPO=https://github.com/rancher/charts
+TO_BRANCH=dev-v2.5-source
+
+# Additional context to standardize dirs
+FROM_TYPE=live
+TO_TYPE=source
+# MIGRATE=1

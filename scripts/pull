@@ -12,7 +12,7 @@ mkdir -p ${TO_BRANCH}/charts
 REPO_DIR=$(basename ${FROM_REPO})
 git clone --depth 1 --branch ${FROM_BRANCH} ${FROM_REPO} 2>/dev/null
 pushd ${REPO_DIR}
-make charts
+[ ${FROM_TYPE} = "source" ] && make charts
 popd
 mv ${REPO_DIR}/charts/* ${FROM_BRANCH}/charts
 rm -rf ${REPO_DIR}
@@ -20,7 +20,7 @@ rm -rf ${REPO_DIR}
 REPO_DIR=$(basename ${TO_REPO})
 git clone --depth 1 --branch ${TO_BRANCH} ${TO_REPO} 2>/dev/null
 pushd ${REPO_DIR}
-make charts
+[ ${TO_TYPE} = "source" ] && make charts
 popd
 mv ${REPO_DIR}/charts/* ${TO_BRANCH}/charts
 rm -rf ${REPO_DIR}

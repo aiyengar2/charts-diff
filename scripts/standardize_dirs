@@ -6,20 +6,62 @@ source ./config
 
 cd ..
 
-for f in ${TO_BRANCH}/charts/*/*/*; do
-    chart_name=$(echo ${f} | cut -d'/' -f4)
-    if [[ ${chart_name} == *-crd ]] && [[ ${chart_name} != "fleet-crd" ]] && [[ ${chart_name} != "rancher-operator-crd" ]]; then
-        chart_name=${chart_name/-crd/\/charts-crd}
+test -f ${TO_BRANCH}/charts/README.md && rm ${TO_BRANCH}/charts/README.md
+test -f ${FROM_BRANCH}/charts/README.md && rm ${FROM_BRANCH}/charts/README.md
+
+if [[ -n ${MIGRATE} ]]; then
+    for f in ${TO_BRANCH}/charts/*/*/*; do
+        chart_name=$(echo ${f} | cut -d'/' -f4)
+        if [[ ${chart_name} == *-crd ]] && [[ ${chart_name} != "fleet-crd" ]] && [[ ${chart_name} != "rancher-operator-crd" ]]; then
+            chart_name=${chart_name/-crd/\/charts-crd}
+        fi
+        dest="${TO_BRANCH}/new-charts/${chart_name}"
+        mkdir -p ${dest}
+        mv ${f}/* ${dest}
+    done
+
+    rm -rf ${TO_BRANCH}/charts
+    mv ${TO_BRANCH}/new-charts ${TO_BRANCH}/charts
+
+    for f in $(find ${FROM_BRANCH} -type f -name "*.tgz"); do
+        tar -xvzf ${f} -C $(dirname ${f})
+        rm ${f}
+    done
+fi
+
+if [ ${FROM_TYPE} != ${TO_TYPE} ]; then
+    if [ ${FROM_TYPE} == "staging" ] || [ $FROM_TYPE == "live" ]; then
+        # Only take the latest chart
+        for chart in $(find ${FROM_BRANCH}/charts -mindepth 2 -maxdepth 2); do 
+            # Delete all charts excep the chart which comes on top on a sort
+            chart_versions=$(find ${chart} -mindepth 1 -maxdepth 1 | sort -r | tail -n+2)
+            if [[ -n ${chart_versions} ]]; then
+                echo Purging $(echo ${chart_versions} | xargs)
+                echo ${chart_versions} | xargs rm -rf
+            fi
+        done
     fi
-    dest="${TO_BRANCH}/new-charts/${chart_name}"
-    mkdir -p ${dest}
-    mv ${f}/* ${dest}
-done
-
-rm -rf ${TO_BRANCH}/charts
-mv ${TO_BRANCH}/new-charts ${TO_BRANCH}/charts
-
-for f in $(find ${FROM_BRANCH} -type f -name "*.tgz"); do
-    tar -xvzf ${f} -C $(dirname ${f})
-    rm ${f}
-done
+    if [ ${TO_TYPE} == "staging" ] || [ $TO_TYPE == "live" ]; then
+        # Only take the latest chart
+        for chart in $(find ${TO_BRANCH}/charts -mindepth 2 -maxdepth 2); do
+            chart_versions=$(find ${chart} -mindepth 1 -maxdepth 1 | sort -r | tail -n+2)
+            if [[ -n ${chart_versions} ]]; then
+                echo Purging $(echo ${chart_versions} | xargs)
+                echo ${chart_versions} | xargs rm -rf
+            fi
+        done
+    fi
+    # Drop versions
+    for chart in $(find ${FROM_BRANCH}/charts -mindepth 3 -maxdepth 3); do 
+        # Remove version
+        new_chart=${chart%\/*}/latest
+        echo ${chart}: ${new_chart}
+        mv ${chart} ${new_chart}
+    done
+    for chart in $(find ${TO_BRANCH}/charts -mindepth 3 -maxdepth 3); do 
+        # Remove version
+        new_chart=${chart%\/*}/latest
+        echo ${chart}: ${new_chart}
+        mv ${chart} ${new_chart}
+    done
+fi
